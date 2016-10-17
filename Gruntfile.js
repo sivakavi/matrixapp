@@ -6,7 +6,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     watch: {
       // If any .less file changes in directory "build/less/" run the "less"-task.
-      files: ["build/less/*.less", "build/less/skins/*.less", "dist/js/app.js"],
+      files: ["build/less/*.less", "build/less/skins/*.less", "dist/js/app.js", "dist/js/pages/*.js"],
       tasks: ["less", "uglify"]
     },
     // "less"-task configuration
@@ -66,12 +66,12 @@ module.exports = function (grunt) {
     // Uglify task info. Compress the js files.
     uglify: {
       options: {
-        mangle: true,
+        mangle: false,
         preserveComments: 'some'
       },
       my_target: {
         files: {
-          'Matrix/www/js/app.min.js': ['dist/js/app.js']
+          'Matrix/www/js/app.min.js': ['dist/js/app.js', 'dist/js/pages/*.js']
         }
       }
     },
