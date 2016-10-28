@@ -71,7 +71,8 @@ module.exports = function (grunt) {
       },
       my_target: {
         files: {
-          'Matrix/www/js/app.min.js': ['dist/js/app.js', 'dist/js/pages/*.js']
+          'Matrix/www/js/cust-app.min.js': ['dist/js/pages/*.js'],
+          'Matrix/www/js/app.min.js': ['dist/js/app.js']
         }
       }
     },

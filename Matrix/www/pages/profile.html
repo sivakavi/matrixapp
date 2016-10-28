@@ -773,5 +773,26 @@
 <script src="../plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/app.min.js"></script>
+
+<script>
+  $(function(){
+    function getParameterByName(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var url = domainUrl + 'user/getuser?userid=' + getParameterByName('id');
+    $.get(url, function(res, status){
+      console.log(res);
+    });
+  })
+</script>
 </body>
 </html>

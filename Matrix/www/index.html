@@ -83,6 +83,8 @@
 <script src="plugins/iCheck/icheck.min.js"></script>
 <!-- VueJs -->
 <script src="plugins/vuejs/vue.js"></script>
+<!-- AdminLTE App -->
+<script src="js/app.min.js"></script>
 
 <script>
   $(function () {
@@ -91,19 +93,33 @@
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' // optional
     });
-
+    console.log('index');
     var modal = new Vue({
         el: '#login-box-body',
         data: {
-            password: '',
-            email: '',
+            password: 'sivakavi',
+            email: 'sivakavi',
         },
         methods: {
             submit: function (e) {
                 e.preventDefault();
-                if(this.email == 'matrix' && this.password == 'matrix') {
-                  window.location.href = 'pages/dashboard.html';
+                console.log('submit');
+                var url = domainUrl + 'user/userlogin';
+                var params = {
+                  username: this.email,
+                  password: this.password
                 }
+                $.post(url, params, function(data, status){
+                  alert("Data: " + data + "\nStatus: " + status);
+                    if ( data == "success" ) {
+                      var url = domainUrl + 'user/getuserbyusername?username=' + params.username;
+                      $.get(url, function(data, status){
+                        console.log(data);
+                          window.location.href = 'pages/dashboard.html';
+                          localStorage.setItem('userdetails', data);
+                      });
+                    }
+                });
             }
         }
     });
