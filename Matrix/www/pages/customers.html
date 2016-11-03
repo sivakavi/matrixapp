@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+  <!-- jquery-ui -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -229,7 +231,7 @@
 
     <!-- Main content -->
     <section class="content">
-
+      <input id="autocomplete">
       <div class="pull-right">
         <a href="addCustomer.html" class="btn bg-maroon btn-flat">Add Customer</a>
       </div>
@@ -325,6 +327,34 @@
         });
     });
 
+
+    //auto complete
+    var dataSource = [
+      {
+        "value": "sivakavi",
+        "label": "sivakavi",
+        "cid": "11abcd"
+      },
+      {
+        "value": "sanjiv",
+        "label": "sanjiv",
+        "cid": "x23dsw"
+      }
+    ];
+
+    //var dataSource = ["sivakavi", "siva"];
+    $( "#autocomplete" ).autocomplete({
+      source: function( request, response ) {
+          var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+          response( $.grep( dataSource, function( item ){
+              var obj = matcher.test( item.label );
+              return obj;
+          }) );
+      },
+      select: function( event, ui ) {
+        console.log(ui.item.cid);
+      }
+    });
   });
 </script>
 </body>
