@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,204 +26,217 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini fixed">
-<div class="wrapper">
+  <div class="wrapper" id="app-3">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>MF</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Matrix</b> Fitness</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="index2.html" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>MF</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Matrix</b> Fitness</span>
       </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">          
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img class="user-image profileimage" alt="User Image">
-              <span class="hidden-xs uname"></span>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img class="user-image profileimage" alt="User Image">
+                <span class="hidden-xs uname"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img class="img-circle profileimage" alt="User Image">
+                  <p><span class="uname"></span> - <span class="userrole"></span><small>Member since <span class="createdat"></span></small></p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <button class="btn bg-purple margin">Profile</button>
+                  </div>
+                  <div class="pull-right">
+                    <button class="btn bg-purple margin logout">Sign out</button>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img class="img-circle profileimage" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p class="uname"></p>
+            <p class="userrole"></p>
+          </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+          <!--<li class="header">MAIN NAVIGATION</li>-->
+          <li>
+            <a href="dashboard.html">
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img class="img-circle profileimage" alt="User Image">
-                <p><span class="uname"></span> - <span class="userrole"></span><small>Member since <span class="createdat"></span></small></p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <button class="btn bg-purple margin">Profile</button>
-                </div>
-                <div class="pull-right">
-                  <buttion class="btn bg-purple margin logout">Sign out</buttion>
-                </div>
-              </li>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-user"></i>
+              <span>Customer</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="addcustomer.html"><i class="fa fa-plus"></i> Add Customer</a></li>
+              <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
+              <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
+              <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
+              <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
+              <li><a href="thismonthexpirecustomer.html"><i class="fa fa-minus-square-o"></i> This Month Expire Customer</a></li>
             </ul>
           </li>
+          <li class="treeview" v-if="seen">
+            <a href="#">
+              <i class="fa fa-cog"></i>
+              <span>Manage</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="membertype.html"><i class="fa fa-credit-card"></i> Member Type</a></li>
+              <li><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
+            </ul>
+          </li>
+          <li class="treeview" v-if="seen">
+            <a href="#">
+              <i class="fa fa-user"></i>
+              <span>Staff</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="addstaff.html"><i class="fa fa-plus"></i> Add Staff</a></li>
+              <li><a href="editstaff.html"><i class="fa fa-edit"></i> Edit Staff</a></li>
+              <li><a href="stafflist.html"><i class="fa fa-list-alt"></i> Staff List</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-rupee"></i>
+              <span>Bill</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="newbill.html"><i class="fa fa-plus"></i> New Bill</a></li>
+              <li><a href="balancebill.html"><i class="fa fa-edit"></i> Balance Bill</a></li>
+              <li><a href="renewalbill.html"><i class="fa fa-list-alt"></i> Renewal Bill</a></li>
+              <li><a href="upgradebill.html"><i class="fa fa-list-alt"></i> Upgrade Bill</a></li>
+            </ul>
+          </li>
+          <li class="treeview" v-if="seen">
+            <a href="#">
+              <i class="fa fa-pie-chart"></i>
+              <span>Reports</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="#"><i class="fa fa-bar-chart"></i> Report 1</a></li>
+              <li><a href="#"><i class="fa fa-bar-chart"></i> Report 2</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="logout">
+              <i class="fa fa-power-off"></i> <span>Logout</span>
+            </a>
+          </li>
         </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img class="img-circle profileimage" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p class="uname"></p>
-          <p class="userrole"></p>
-        </div>
-      </div>
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <!--<li class="header">MAIN NAVIGATION</li>-->
-        <li>
-          <a href="dashboard.html">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Customer</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="addcustomer.html"><i class="fa fa-plus"></i> Add Customer</a></li>
-            <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
-            <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
-            <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
-            <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
-            <li><a href="thismonthexpirecustomer.html"><i class="fa fa-minus-square-o"></i> This Month Expire Customer</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cog"></i>
-            <span>Manage</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="membertype.html"><i class="fa fa-credit-card"></i> Member Type</a></li>
-            <li><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Staff</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="addstaff.html"><i class="fa fa-plus"></i> Add Staff</a></li>
-            <li><a href="editstaff.html"><i class="fa fa-edit"></i> Edit Staff</a></li>
-            <li><a href="stafflist.html"><i class="fa fa-list-alt"></i> Staff List</a></li>
-          </ul>
-        </li>
-       <li class="treeview">
-          <a href="#">
-            <i class="fa fa-rupee"></i>
-            <span>Bill</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="newbill.html"><i class="fa fa-plus"></i> New Bill</a></li>
-            <li><a href="balancebill.html"><i class="fa fa-edit"></i> Balance Bill</a></li>
-            <li><a href="renewalbill.html"><i class="fa fa-list-alt"></i> Renewal Bill</a></li>
-            <li><a href="upgradebill.html"><i class="fa fa-list-alt"></i> Upgrade Bill</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Reports</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-bar-chart"></i> Report 1</a></li>
-            <li><a href="#"><i class="fa fa-bar-chart"></i> Report 2</a></li>
-          </ul>
-        </li>
-        <li>
-          <a class="logout">
-            <i class="fa fa-power-off"></i> <span>Logout</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
 
-  <!-- =============================================== -->
+    <!-- =============================================== -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Blank page
-        <small>it all starts here</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
-    </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Blank page
+          <small>it all starts here</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="#">Examples</a></li>
+          <li class="active">Blank page</li>
+        </ol>
+      </section>
 
-    <!-- Main content -->
-    <section class="content">
+      <!-- Main content -->
+      <section class="content">
 
-    </section>
-    <!-- /.content -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2016-2017 <a href="http://matrix-gym.in" target="_blank">Matrix Fitness</a>.</strong> All
+      rights reserved.
+    </footer>
   </div>
-  <!-- /.content-wrapper -->
+  <!-- ./wrapper -->
 
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2016-2017 <a href="http://matrix-gym.in" target="_blank">Matrix Fitness</a>.</strong> All rights reserved.
-  </footer>
-</div>
-<!-- ./wrapper -->
+  <!-- jQuery 2.2.3 -->
+  <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="../js/bootstrap.min.js"></script>
+  <!-- Slimscroll -->
+  <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="../plugins/fastclick/fastclick.js"></script>
+  <script src="../plugins/vuejs/vue.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../js/app.min.js"></script>
 
-<!-- jQuery 2.2.3 -->
-<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../js/bootstrap.min.js"></script>
-<!-- Slimscroll -->
-<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../plugins/fastclick/fastclick.js"></script>
-<script src="../plugins/vuejs/vue.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/app.min.js"></script>
-
-<script>
+  <script>
   $(function () {
+
+    var us = true;
+    if(localStorage.getItem("userrole")=="STAFF")
+      us = false;
+
+      var app3 = new Vue({
+      el: '#app-3',
+      data: {
+      seen: us
+      }
+    });
 
     var uname = new Vue({
     el: '.uname',
@@ -272,4 +286,5 @@
   });
 </script>
 </body>
+
 </html>
