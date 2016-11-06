@@ -210,8 +210,6 @@
             </ul>
             <div class="tab-content">
               <div class="active tab-pane padtop" id="membertypelist">
-                <input type="button" value="click me" onclick="gotoedit()"/>
-
                 <table id="membertype" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -250,18 +248,18 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane padtop" id="editmembertype">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="editform">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10 col-md-5">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      <input type="text" class="form-control" v-model="membertypename">
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10 col-md-5">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button class="btn btn-danger" v-on:click="submit($event)">Submit</button>
                     </div>
                   </div>
                 </form>
@@ -289,9 +287,6 @@
   <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-  
   <!-- Bootstrap 3.3.6 -->
   <script src="../js/bootstrap.min.js"></script>
   <!-- DataTables -->
@@ -307,7 +302,58 @@
 
   <script>
 
-    function gotoedit(){
+    var editmembertype = new Vue({
+            el: '#editform',
+            data: {
+              membertypeid : "",
+              membertypename : "",
+              amount : "",
+              duration : "",
+              createdat : "",
+              updatedat :""
+            }
+
+            });
+
+
+    function gotoedit(x){
+        
+        $.get(domainUrl + 'membertype/getmembertypebyid?membertypeid='+x, function(res, status){
+
+        var result = res[0];
+
+        //window.x = editmembertype;
+
+        //editmembertype.$data = result;
+
+        // editmembertype._data.membertypeid = result.membertypeid;
+        // editmembertype._data.membertypename = result.membertypename;
+        // editmembertype._data.amount = result.amount;
+        // editmembertype._data.duration = result.duration;
+        // editmembertype._data.createdat = result.createdat;
+        // editmembertype._data.updatedat = result.updatedat;
+
+         /* editmembertype = new Vue({
+            el: '#editform',
+            data: {
+              membertypeid : res[0].membertypeid,
+              membertypename : res[0].membertypename,
+              amount : res[0].amount,
+              duration : res[0].duration,
+              createdat : res[0].createdat,
+              updatedat :res[0].updatedat
+            },
+            methods: { 
+                     submit: function (e) {
+                        e.preventDefault();
+                        console.log('submit');
+                        window.edit = this.data;
+                       }
+          }
+          });*/
+
+         });
+
         $('.nav-tabs a[href="#editmembertype"]').tab('show');
     };
     
@@ -333,7 +379,7 @@
 
   var userrole = new Vue({
     el: '.userrole',
-    data: {
+    data: { 
       userrole: localStorage.getItem("userrole")
     }
   });
@@ -372,19 +418,20 @@
    
     $.get(domainUrl + 'membertype/getallmembertype', function(res, status){
         $("#membertype").DataTable({
+          responsive: true,
           data: res,
           columns: [
             {"data": "membertypeid",
-                render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
+              //   render: function ( data, type, obj ) {
+              //   if (data != null) {
+              //     return data;
+              //   }
+              // }
+              render: function ( data, type, obj ) {
+                if (data != null || obj.membertypeid != null) {
+                  return '<input type="button" value="edit" class="btn bg-maroon btn-flat" onclick="gotoedit('+obj.membertypeid+')"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ obj.membertypeid;
                 }
               }
-            //   render: function ( data, type, obj ) {
-            //     if (data != null || obj.lname != null) {
-            //       return '<a href="profile.html?id='+obj.cid+'">'+data +' '+ obj.lname +'</a>';
-            //     }
-            //   }
             },
             {"data":"membertypename",
               render: function ( data, type, obj ) {
