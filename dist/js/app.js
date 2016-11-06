@@ -12,7 +12,9 @@
  */
 
 // Domain URL
-window.domainUrl = "http://api.matrix-gym.in/api/";
+//window.domainUrl = "http://api.matrix-gym.in/api/";
+window.domainUrl = "http://localhost:3862/api/";
+
 
 //Make sure jQuery has been loaded before app.js
 if (typeof jQuery === "undefined") {

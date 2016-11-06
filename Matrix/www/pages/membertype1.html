@@ -28,9 +28,9 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <style>
-    .padtop {
-      padding-top: 30px;
-    }
+  .padtop{
+      padding-top:30px;
+  }
   </style>
 </head>
 
@@ -201,60 +201,60 @@
       <!-- Main content -->
       <section class="content">
 
-        <div>
+          <div>
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#membertypelist" data-toggle="tab">Member Type List</a></li>
               <li><a href="#addmembertype" data-toggle="tab">Add Member Type</a></li>
-              <li><a href="#editmembertype">Edi Member Type</a></li>
+              <li><a href="#editmembertype" data-toggle="tab">Edi Member Type</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane padtop" id="membertypelist">
                 <table id="membertype" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Duration (Months)</th>
-                      <th>Amount</th>
-                      <th>Created At</th>
-                      <th>Updated At</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  </tbody>
-                </table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Duration (Months)</th>
+                    <th>Amount</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+              </table>
 
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane padtop" id="addmembertype">
-                <form class="form-horizontal" id="addform">
+                  <form class="form-horizontal" id="addform">
 
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Member Type Name</label>
                     <div class="col-sm-10 col-md-5">
-                      <input type="text" class="form-control" id="addmembertypename">
+                      <input type="text" class="form-control" v-model="membertypename">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Amount</label>
                     <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="addmembertypeamount">
+                      <input type="number" class="form-control" v-model="amount">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Duration (Months)</label>
                     <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="addmembertypeduration">
+                      <input type="number" class="form-control" v-model="duration">
                     </div>
                   </div>
-
+                  
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10 col-md-5">
-                      <input type="button" class="btn btn-danger" id="addSubmit" value="Submit"/>
+                      <button class="btn btn-danger" v-on:click="addMemberType($event)">Submit</button>
                     </div>
                   </div>
                 </form>
@@ -263,7 +263,7 @@
 
               <div class="tab-pane padtop" id="editmembertype">
                 <form class="form-horizontal" id="editform">
-
+                  
                   <div class="form-group" style="display:none;">
                     <label for="inputName" class="col-sm-2 control-label">Member Type ID</label>
                     <div class="col-sm-10 col-md-5">
@@ -291,10 +291,10 @@
                       <input type="number" class="form-control" id="editmembertypeduration">
                     </div>
                   </div>
-
+                  
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10 col-md-5">
-                      <input type="button" class="btn btn-danger" id="editSubmit" value="Submit"/>
+                      <button class="btn btn-danger" id="editSubmit">Submit</button>
                     </div>
                   </div>
                 </form>
@@ -335,9 +335,21 @@
   <!-- AdminLTE App -->
   <script src="../js/app.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-
   <script>
+
+    // var editmembertype = new Vue({
+    //         el: '#editform',
+    //         data: {
+    //           membertypeid : "",
+    //           membertypename : "",
+    //           amount : "",
+    //           duration : "",
+    //           createdat : "",
+    //           updatedat :""
+    //         }
+
+    //         });
+
 
     function gotoedit(x){
         
@@ -350,11 +362,68 @@
         $("#editmembertypeamount").val(result.amount);
         $("#editmembertypeduration").val(result.duration);
 
+        //window.x = editmembertype;
+
+        //editmembertype.$data = result;
+
+        // editmembertype._data.membertypeid = result.membertypeid;
+        // editmembertype._data.membertypename = result.membertypename;
+        // editmembertype._data.amount = result.amount;
+        // editmembertype._data.duration = result.duration;
+        // editmembertype._data.createdat = result.createdat;
+        // editmembertype._data.updatedat = result.updatedat;
+
+         /* editmembertype = new Vue({
+            el: '#editform',
+            data: {
+              membertypeid : res[0].membertypeid,
+              membertypename : res[0].membertypename,
+              amount : res[0].amount,
+              duration : res[0].duration,
+              createdat : res[0].createdat,
+              updatedat :res[0].updatedat
+            },
+            methods: { 
+                     submit: function (e) {
+                        e.preventDefault();
+                        console.log('submit');
+                        window.edit = this.data;
+                       }
+          }
+          });*/
+
          });
 
         $('.nav-tabs a[href="#editmembertype"]').tab('show');
     };
 
+    var addmembertype = new Vue({
+            el: '#addform',
+            data: {
+              membertypeid : "",
+              membertypename : "",
+              amount : "",
+              duration : "",
+              createdat : "",
+              updatedat :""
+            },
+            methods: { 
+                     addMemberType: function (e) {
+                        e.preventDefault();
+                        console.log('submit');
+                        var params = {
+                            membertypname: this.membertypename,
+                            amount: this.amount,
+                            duration:this.duration,
+                            createdat : "",
+                            updatedat :""
+                          }
+
+                          window.param = params;
+                       }
+          }
+          });
+    
   $(function () {
 
     var us = true;
@@ -415,18 +484,21 @@
     window.location.href = '../index.html';
   });
 
-  function loadMembertype(){
-
-        $.get(domainUrl + 'membertype/getallmembertype', function(res, status){
-
+   
+    $.get(domainUrl + 'membertype/getallmembertype', function(res, status){
         $("#membertype").DataTable({
           responsive: true,
           data: res,
           columns: [
             {"data": "membertypeid",
+              //   render: function ( data, type, obj ) {
+              //   if (data != null) {
+              //     return data;
+              //   }
+              // }
               render: function ( data, type, obj ) {
                 if (data != null || obj.membertypeid != null) {
-                  return '<input type="button" value="edit" class="btn bg-maroon btn-flat" style="padding : 0px 3px !important;" onclick="gotoedit('+obj.membertypeid+')"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ obj.membertypeid;
+                  return '<input type="button" value="edit" class="btn bg-maroon btn-flat" onclick="gotoedit('+obj.membertypeid+')"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ obj.membertypeid;
                 }
               }
             },
@@ -454,116 +526,23 @@
             {"data":"createdat",
               render: function ( data, type, obj ) {
                 if (data != null) {
-                  return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                  return data;
                 }
               }
             },
             {"data":"updatedat",
               render: function ( data, type, obj ) {
                 if (data != null) {
-                  return moment(data).format("YYYY-MM-DD HH:mm:ss");
+                  return data;
                 }
               }
             }
             ]
         });
     });
-  }
 
 
-  loadMembertype();
-
-  function loadMembertypeAfterAdd(){
-
-    $.get(domainUrl + 'membertype/getallmembertype', function(res, status){
-      $('#membertype').dataTable().fnClearTable();
-      $('#membertype').dataTable().fnAddData(res);
-    });
-
-  }
-   
-
-
-    $("#addSubmit").click(function(){
-
-      // Number.prototype.padLeft = function(base,chr){
-      //     var  len = (String(base || 10).length - String(this).length)+1;
-      //     return len > 0? new Array(len).join(chr || '0')+this : this;
-      // }
-
-      // var d = new Date,
-      // dformat = [d.getFullYear(),(d.getMonth()+1).padLeft(),d.getDate().padLeft()].join('-') +' ' +
-      //         [d.getHours().padLeft(),d.getMinutes().padLeft(),d.getSeconds().padLeft()].join(':');
-
-      var today = new Date();
-
-      var params = {
-                  membertypename: $("#addmembertypename").val(),
-                  amount: $("#addmembertypeamount").val(),
-                  duration:$("#addmembertypeduration").val(),
-                  //createdat:dformat.toString(),
-                  //updatedat:dformat.toString()
-                  createdat:moment(today).format("YYYY-MM-DD HH:mm:ss"),
-                  updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
-                }
-
-                $.post(domainUrl + 'membertype/addmembertype',params, function(res, status){
-                  //console.log(res);
-                  if(res=="success"){
-                    alert("Member Type added successfully....");
-                    $("#addmembertypename").val("");
-                    $("#addmembertypeamount").val("");
-                    $("#addmembertypeduration").val("");
-                    loadMembertypeAfterAdd();
-                    $('.nav-tabs a[href="#membertypelist"]').tab('show');
-                  }else{
-                    alert("Error.....");
-                  }
-                });
-    });
-
-
-    $("#editSubmit").click(function(){
-
-      var today = new Date();
-
-      var params = {
-                  membertypeid: $("#editmembertypeid").val(),
-                  membertypename: $("#editmembertypename").val(),
-                  amount: $("#editmembertypeamount").val(),
-                  duration:$("#editmembertypeduration").val(),
-                  updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
-                }
-
-                $.post(domainUrl + 'membertype/editmembertype',params, function(res, status){
-                  //console.log(res);
-                  if(res=="success"){
-                    alert("Member Type edited successfully....");
-                    $("#editmembertypeid").val("");
-                    $("#editmembertypename").val("");
-                    $("#editmembertypeamount").val("");
-                    $("#editmembertypeduration").val("");
-                    loadMembertypeAfterAdd();
-                    $('.nav-tabs a[href="#membertypelist"]').tab('show');
-                  }else{
-                    alert("Error.....");
-                  }
-                });
-    });
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      var target = $(e.target).attr("href") // activated tab
-      //alert(target);
-      if(target=="#addmembertype" || target=="#membertypelist"){
-        $("#addmembertypename").val("");
-        $("#addmembertypeamount").val("");
-        $("#addmembertypeduration").val("");
-        $("#editmembertypeid").val("");
-        $("#editmembertypename").val("");
-        $("#editmembertypeamount").val("");
-        $("#editmembertypeduration").val("");
-      }
-    });
+    
 
   });
 </script>
