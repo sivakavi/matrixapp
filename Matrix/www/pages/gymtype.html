@@ -66,7 +66,7 @@
                 <!-- User image -->
                 <li class="user-header">
                   <img class="img-circle profileimage" alt="User Image">
-                  <p><span class="uname"></span> - <span class="userrole"></span><small>Member since <span class="createdat"></span></small></p>
+                  <p><span class="uname"></span> - <span class="userrole"></span><small>Gym since <span class="createdat"></span></small></p>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -131,8 +131,8 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li class="active"><a href="membertype.html"><i class="fa fa-credit-card"></i> Member Type</a></li>
-              <li><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
+              <li><a href="membertype.html"><i class="fa fa-credit-card"></i> Member Type</a></li>
+              <li class="active"><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
             </ul>
           </li>
           <li class="treeview" v-if="seen">
@@ -193,10 +193,10 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>Member Type</h1>
+        <h1>Gym Type</h1>
         <ol class="breadcrumb">
           <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <li class="active">Member Type Page</li>
+          <li class="active">Gym Type Page</li>
         </ol>
       </section>
 
@@ -206,20 +206,17 @@
         <div>
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#membertypelist" data-toggle="tab">Member Type List</a></li>
-              <li><a href="#addmembertype" data-toggle="tab">Add Member Type</a></li>
-              <li><a href="#editmembertype">Edi Member Type</a></li>
+              <li class="active"><a href="#gymtypelist" data-toggle="tab">Gym Type List</a></li>
+              <li><a href="#addgymtype" data-toggle="tab">Add Gym Type</a></li>
+              <li><a href="#editgymtype">Edi Gym Type</a></li>
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane padtop" id="membertypelist">
-                <table id="membertype" class="table table-bordered table-striped">
+              <div class="active tab-pane padtop" id="gymtypelist">
+                <table id="gymtype" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Duration (Months)</th>
-                      <th>Amount</th>
-                      <th>Color Code</th>
                       <th>Created At</th>
                       <th>Updated At</th>
                     </tr>
@@ -231,34 +228,13 @@
 
               </div>
               <!-- /.tab-pane -->
-              <div class="tab-pane padtop" id="addmembertype">
+              <div class="tab-pane padtop" id="addgymtype">
                 <form class="form-horizontal" id="addform">
 
                   <div class="form-group">
-                    <label for="addmembertypename" class="col-sm-2 control-label">Member Type Name</label>
+                    <label for="addgymtypename" class="col-sm-2 control-label">Gym Type Name</label>
                     <div class="col-sm-10 col-md-5">
-                      <input type="text" class="form-control" id="addmembertypename">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="addmembertypeamount" class="col-sm-2 control-label">Amount</label>
-                    <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="addmembertypeamount">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="addmembertypeduration" class="col-sm-2 control-label">Duration (Months)</label>
-                    <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="addmembertypeduration">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="addmembertypecolorcode" class="col-sm-2 control-label">Color Code</label>
-                    <div class="col-sm-10 col-md-5">
-                      <input type="text" class="form-control" id="addmembertypecolorcode">
+                      <input type="text" class="form-control" id="addgymtypename">
                     </div>
                   </div>
 
@@ -271,41 +247,20 @@
               </div>
               <!-- /.tab-pane -->
 
-              <div class="tab-pane padtop" id="editmembertype">
+              <div class="tab-pane padtop" id="editgymtype">
                 <form class="form-horizontal" id="editform">
 
                   <div class="form-group" style="display:none;">
-                    <label for="editmembertypeid" class="col-sm-2 control-label">Member Type ID</label>
+                    <label for="editgymtypeid" class="col-sm-2 control-label">Gym Type ID</label>
                     <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="editmembertypeid">
+                      <input type="number" class="form-control" id="editgymtypeid">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="editmembertypename" class="col-sm-2 control-label">Member Type Name</label>
+                    <label for="editgymtypename" class="col-sm-2 control-label">Gym Type Name</label>
                     <div class="col-sm-10 col-md-5">
-                      <input type="text" class="form-control" id="editmembertypename">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="editmembertypeamount" class="col-sm-2 control-label">Amount</label>
-                    <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="editmembertypeamount">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="editmembertypeduration" class="col-sm-2 control-label">Duration (Months)</label>
-                    <div class="col-sm-10 col-md-5">
-                      <input type="number" class="form-control" id="editmembertypeduration">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="editmembertypecolorcode" class="col-sm-2 control-label">Color Code</label>
-                    <div class="col-sm-10 col-md-5">
-                      <input type="text" class="form-control" id="editmembertypecolorcode">
+                      <input type="text" class="form-control" id="editgymtypename">
                     </div>
                   </div>
 
@@ -362,21 +317,18 @@
 
     function gotoedit(x){
         
-        $.get(domainUrl + 'membertype/getmembertypebyid?membertypeid='+x, function(res, status){
+        $.get(domainUrl + 'gymtype/getgymtypebyid?gymtypeid='+x, function(res, status){
 
         var result = res[0];
 
-        $("#editmembertypeid").val(result.membertypeid);
-        $("#editmembertypename").val(result.membertypename);
-        $("#editmembertypeamount").val(result.amount);
-        $("#editmembertypeduration").val(result.duration);
-        $("#editmembertypecolorcode").val(result.colorcode);
-
+        $("#editgymtypeid").val(result.gymtypeid);
+        $("#editgymtypename").val(result.gymtypename);
+        
          }).fail(function(){
             toastr.error('Please check Network...','Error...')
          });
 
-        $('.nav-tabs a[href="#editmembertype"]').tab('show');
+        $('.nav-tabs a[href="#editgymtype"]').tab('show');
     };
 
   $(function () {
@@ -439,46 +391,25 @@
     window.location.href = '../index.html';
   });
 
-  function loadMembertype(){
+  function loadGymtype(){
 
-        $.get(domainUrl + 'membertype/getallmembertype', function(res, status){
+        $.get(domainUrl + 'gymtype/getallgymtype', function(res, status){
 
-        $("#membertype").DataTable({
+        $("#gymtype").DataTable({
           responsive: true,
           data: res,
           columns: [
-            {"data": "membertypeid",
+            {"data": "gymtypeid",
               render: function ( data, type, obj ) {
-                if (data != null || obj.membertypeid != null) {
-                  return '<input type="button" value="edit" class="btn bg-maroon btn-flat" style="padding : 0px 3px !important;" onclick="gotoedit('+obj.membertypeid+')"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ obj.membertypeid;
+                if (data != null || obj.gymtypeid != null) {
+                  return '<input type="button" value="edit" class="btn bg-maroon btn-flat" style="padding : 0px 3px !important;" onclick="gotoedit('+obj.gymtypeid+')"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ obj.gymtypeid;
                 }
               }
             },
-            {"data":"membertypename",
+            {"data":"gymtypename",
               render: function ( data, type, obj ) {
                 if (data != null) {
                   return data;
-                }
-              }
-            },
-            {"data":"duration",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"amount",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"colorcode",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<div style="height:20px; width:20px; border-radius:5px; background-color:'+ data +'"></div>';
                 }
               }
             },
@@ -504,13 +435,13 @@
   }
 
 
-  loadMembertype();
+  loadGymtype();
 
-  function loadMembertypeAfterAdd(){
+  function loadGymtypeAfterAdd(){
 
-    $.get(domainUrl + 'membertype/getallmembertype', function(res, status){
-      $('#membertype').dataTable().fnClearTable();
-      $('#membertype').dataTable().fnAddData(res);
+    $.get(domainUrl + 'gymtype/getallgymtype', function(res, status){
+      $('#gymtype').dataTable().fnClearTable();
+      $('#gymtype').dataTable().fnAddData(res);
     }).fail(function(){
          toastr.error('Please check Network...','Error...')
     });
@@ -520,43 +451,21 @@
 
 
     $("#addSubmit").click(function(){
-
-      // Number.prototype.padLeft = function(base,chr){
-      //     var  len = (String(base || 10).length - String(this).length)+1;
-      //     return len > 0? new Array(len).join(chr || '0')+this : this;
-      // }
-
-      // var d = new Date,
-      // dformat = [d.getFullYear(),(d.getMonth()+1).padLeft(),d.getDate().padLeft()].join('-') +' ' +
-      //         [d.getHours().padLeft(),d.getMinutes().padLeft(),d.getSeconds().padLeft()].join(':');
-
       var today = new Date();
-
       var params = {
-                  membertypename: $("#addmembertypename").val(),
-                  amount: $("#addmembertypeamount").val(),
-                  duration:$("#addmembertypeduration").val(),
-                  colorcode:$("#addmembertypecolorcode").val(),
-                  //createdat:dformat.toString(),
-                  //updatedat:dformat.toString()
+                  gymtypename: $("#addgymtypename").val(),
                   createdat:moment(today).format("YYYY-MM-DD HH:mm:ss"),
                   updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
                 }
 
-                $.post(domainUrl + 'membertype/addmembertype',params, function(res, status){
-                  //console.log(res);
+                $.post(domainUrl + 'gymtype/addgymtype',params, function(res, status){
                   if(res=="success"){
-                    //alert("Member Type added successfully....");
-                    toastr.success('Added Successfully...!', 'Member Type')
-                    $("#addmembertypename").val("");
-                    $("#addmembertypeamount").val("");
-                    $("#addmembertypeduration").val("");
-                    $("#addmembertypecolorcode").val("");
-                    loadMembertypeAfterAdd();
-                    $('.nav-tabs a[href="#membertypelist"]').tab('show');
+                    toastr.success('Added Successfully...!', 'Gym Type')
+                    $("#addgymtypename").val("");
+                    loadGymtypeAfterAdd();
+                    $('.nav-tabs a[href="#gymtypelist"]').tab('show');
                   }else{
-                    //alert("Error.....");
-                    toastr.success('Error...!', 'Member Type')
+                    toastr.success('Error...!', 'Gym Type')
                   }
                 }).fail(function(){
                     toastr.error('Please check Network...','Error...')
@@ -567,31 +476,21 @@
     $("#editSubmit").click(function(){
 
       var today = new Date();
-
       var params = {
-                  membertypeid: $("#editmembertypeid").val(),
-                  membertypename: $("#editmembertypename").val(),
-                  amount: $("#editmembertypeamount").val(),
-                  duration:$("#editmembertypeduration").val(),
-                  colorcode:$("#editmembertypecolorcode").val(),
+                  gymtypeid: $("#editgymtypeid").val(),
+                  gymtypename: $("#editgymtypename").val(),
                   updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
                 }
 
-                $.post(domainUrl + 'membertype/editmembertype',params, function(res, status){
-                  //console.log(res);
+                $.post(domainUrl + 'gymtype/editgymtype',params, function(res, status){
                   if(res=="success"){
-                    toastr.success('Edited Successfully...!', 'Member Type')
-                    //alert("Member Type edited successfully....");
-                    $("#editmembertypeid").val("");
-                    $("#editmembertypename").val("");
-                    $("#editmembertypeamount").val("");
-                    $("#editmembertypeduration").val("");
-                    $("#editmembertypecolorcode").val("");
-                    loadMembertypeAfterAdd();
-                    $('.nav-tabs a[href="#membertypelist"]').tab('show');
+                    toastr.success('Edited Successfully...!', 'Gym Type')
+                    $("#editgymtypeid").val("");
+                    $("#editgymtypename").val("");
+                    loadGymtypeAfterAdd();
+                    $('.nav-tabs a[href="#gymtypelist"]').tab('show');
                   }else{
-                    //alert("Error.....");
-                    toastr.success('Error...!', 'Member Type')
+                    toastr.success('Error...!', 'Gym Type')
                   }
                 }).fail(function(){
                     toastr.error('Please check Network...','Error...')
@@ -600,17 +499,10 @@
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var target = $(e.target).attr("href") // activated tab
-      //alert(target);
-      if(target=="#addmembertype" || target=="#membertypelist"){
-        $("#addmembertypename").val("");
-        $("#addmembertypeamount").val("");
-        $("#addmembertypeduration").val("");
-        $("#addmembertypecolorcode").val("");
-        $("#editmembertypeid").val("");
-        $("#editmembertypename").val("");
-        $("#editmembertypeamount").val("");
-        $("#editmembertypeduration").val("");
-        $("#editmembertypecolorcode").val("");
+      if(target=="#addgymtype" || target=="#gymtypelist"){
+        $("#addgymtypename").val("");
+        $("#editgymtypeid").val("");
+        $("#editgymtypename").val("");
       }
     });
 
