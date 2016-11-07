@@ -29,6 +29,11 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style>
+    .alncenter{
+      text-align:center;
+    }
+  </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
@@ -99,7 +104,7 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
-          <li class="treeview">
+          <li class="treeview active">
             <a href="#">
               <i class="fa fa-user"></i>
               <span>Customer</span>
@@ -110,7 +115,7 @@
             <ul class="treeview-menu">
               <li><a href="addcustomer.html"><i class="fa fa-plus"></i> Add Customer</a></li>
               <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
-              <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
+              <li class="active"><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
               <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
               <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
               <li><a href="comingsoonexpirecustomer.html"><i class="fa fa-minus-square-o"></i> Coming Soon Expire Customer</a></li>
@@ -187,20 +192,35 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
-          Blank page
-          <small>it all starts here</small>
-        </h1>
+        <h1>All Customer List</h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="#">Examples</a></li>
-          <li class="active">Blank page</li>
+          <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+          <li class="active">Customer List</li>
         </ol>
       </section>
 
       <!-- Main content -->
       <section class="content">
+        <div style="background:#fff;padding:20px;">
+        <table id="customerlist" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Photo</th>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Mobile</th>
+                      <th>Membertype</th>
+                      <th>Gymtype</th>
+                      <th>Join Date</th>
+                      <th>Start Date</th>
+                      <th>Expire Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
+                  </tbody>
+                </table>
+          </div>
       </section>
       <!-- /.content -->
     </div>
@@ -292,6 +312,91 @@
     localStorage.setItem('createdat', "");
     window.location.href = '../index.html';
   });
+
+
+  function loadCustomerList(){
+
+        $.get(domainUrl + 'customer/getallcustomer', function(res, status){
+
+        $("#customerlist").DataTable({
+          responsive: true,
+          data: res,
+          columns: [
+            {"data": "cphoto",
+              render: function ( data, type, obj ) {
+                if (data != null || obj.photo != null) {
+                  return '<img src="'+ data +'" alt="profile img" style="width:30px; height:30px;"/>';
+                }else{
+                  return'<img src="../img/avatar.png" alt="profile img" style="width:30px; height:30px;"/>';
+                }
+              },
+              "sClass":"alncenter"
+            },
+            {"data":"cid",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +'</a>';
+                }
+              }
+            },
+            {"data":"fname",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +' '+ obj.lname +'</a>';
+                }
+              }
+            },
+            {"data":"phone",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data":"membertypename",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data":"gymtypename",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data":"joindate",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return moment(data).format("YYYY-MM-DD");
+                }
+              }
+            },
+            {"data":"startdate",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return moment(data).format("YYYY-MM-DD");
+                }
+              }
+            },
+            {"data":"enddate",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return moment(data).format("YYYY-MM-DD");
+                }
+              }
+            }
+            ]
+        });
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+
+  loadCustomerList();
 
   });
 </script>

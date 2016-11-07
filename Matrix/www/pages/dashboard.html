@@ -111,7 +111,7 @@
               <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
               <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
               <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
-              <li><a href="thismonthexpirecustomer.html"><i class="fa fa-minus-square-o"></i> This Month Expire Customer</a></li>
+              <li><a href="comingsoonexpirecustomer.html"><i class="fa fa-minus-square-o"></i> Coming Soon Expire Customer</a></li>
             </ul>
           </li>
           <li class="treeview" v-if="seen">
@@ -194,28 +194,26 @@
       <!-- Info boxes -->
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <a href="comingsoonexpirecustomer.html"><div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text" style="white-space:normal !important;">This Month<br/>Expire Customer</span>
+            <div class="info-box-content" style="color:#000;">
+              <span class="info-box-text" style="white-space:normal !important;">Coming soon<br/>Expire Customer</span>
               <span class="info-box-number" style="font-size:30px;" id="thismonthexpire"></span>
             </div>
             <!-- /.info-box-content -->
-          </div>
+          </div></a>
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <a href="expiredcustomer.html"><div class="info-box">
             <span class="info-box-icon bg-red"><i class="ion ion-ios-people"></i></span>
-
-            <div class="info-box-content">
+            <div class="info-box-content" style="color:#000;">
               <span class="info-box-text" style="white-space:normal !important;">Expired <br/>Customers</span>
               <span class="info-box-number" style="font-size:30px;" id="expiredcustomer"></span>
             </div>
             <!-- /.info-box-content -->
-          </div>
+          </div></a>
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
@@ -224,28 +222,26 @@
         <div class="clearfix visible-sm-block"></div>
 
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <a href="paymentduecustomer.html"><div class="info-box">
             <span class="info-box-icon bg-green"><i class="ion ion-person-stalker"></i></span>
-
-            <div class="info-box-content">
+            <div class="info-box-content" style="color:#000;">
               <span class="info-box-text" style="white-space:normal !important;">Payment due <br/>customers</span>
               <span class="info-box-number" style="font-size:30px;" id="paymentduecustomer"></span>
             </div>
             <!-- /.info-box-content -->
-          </div>
+          </div></a>
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <a href="customerlist.html"><div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
-            <div class="info-box-content">
+            <div class="info-box-content" style="color:#000;">
               <span class="info-box-text" style="white-space:normal !important;">Total customers</span>
               <span class="info-box-number" style="font-size:30px;" id="allcustomer"></span>
             </div>
             <!-- /.info-box-content -->
-          </div>
+          </div></a>
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
@@ -412,7 +408,7 @@
           </div>
           <!-- /.box -->
 
-          <div class="box box-default">
+          <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Customer Chart</h3>
 
@@ -702,7 +698,7 @@ $(function () {
   function loadExpiredCustomer(){
     var today = new Date();
     var t = moment(today).format("YYYY-MM-DD")
-    $.get(domainUrl + 'customer/getallexpiredcustomer?today='+ today, function(res, status){
+    $.get(domainUrl + 'customer/getallexpiredcustomer?today='+ t, function(res, status){
       $("#expiredcustomer").empty();
       $("#expiredcustomer").append(res.length);
     }).fail(function(){
@@ -714,7 +710,8 @@ $(function () {
     var today = new Date();
     var month = today.getMonth()+1;
     var year = today.getYear();
-    $.get(domainUrl + 'customer/getallthismonthexpirecustomer?year='+ year +'&month='+ month, function(res, status){
+    var t = moment(today).format("YYYY-MM-DD")
+    $.get(domainUrl + 'customer/getallthismonthexpirecustomer?year='+ year +'&month='+ month +'&today='+t, function(res, status){
       $("#thismonthexpire").empty();
       $("#thismonthexpire").append(res.length);
     }).fail(function(){
