@@ -198,8 +198,8 @@
             <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">New Customers</span>
-              <span class="info-box-number">90<small>%</small></span>
+              <span class="info-box-text" style="white-space:normal !important;">This Month<br/>Expire Customer</span>
+              <span class="info-box-number" style="font-size:30px;" id="thismonthexpire"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -211,8 +211,8 @@
             <span class="info-box-icon bg-red"><i class="ion ion-ios-people"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Expired <br/>Customers</span>
-              <span class="info-box-number">41,410</span>
+              <span class="info-box-text" style="white-space:normal !important;">Expired <br/>Customers</span>
+              <span class="info-box-number" style="font-size:30px;" id="expiredcustomer"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -228,8 +228,8 @@
             <span class="info-box-icon bg-green"><i class="ion ion-person-stalker"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Payment due <br/>customers</span>
-              <span class="info-box-number">760</span>
+              <span class="info-box-text" style="white-space:normal !important;">Payment due <br/>customers</span>
+              <span class="info-box-number" style="font-size:30px;" id="paymentduecustomer"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -241,8 +241,8 @@
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Total customers</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-text" style="white-space:normal !important;">Total customers</span>
+              <span class="info-box-number" style="font-size:30px;" id="allcustomer"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -262,54 +262,15 @@
                   <h3 class="box-title">Latest Members</h3>
 
                   <div class="box-tools pull-right">
-                    <span class="label label-danger">8 New Members</span>
+                    <span class="label label-danger" id="membercount"></span>
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
                   </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                  <ul class="users-list clearfix">
-                    <li>
-                      <img src="../img/default.png" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander Pierce</a>
-                      <span class="users-list-date">Today</span>
-                    </li>
-                    <li>
-                      <img src="../img/user8-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Norman</a>
-                      <span class="users-list-date">Yesterday</span>
-                    </li>
-                    <li>
-                      <img src="../img/user7-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Jane</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img src="../img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">John</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img src="../img/user2-160x160.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander</a>
-                      <span class="users-list-date">13 Jan</span>
-                    </li>
-                    <li>
-                      <img src="../img/user5-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Sarah</a>
-                      <span class="users-list-date">14 Jan</span>
-                    </li>
-                    <li>
-                      <img src="../img/user4-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nora</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
-                    <li>
-                      <img src="../img/user3-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nadia</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
+                  <ul class="users-list clearfix" id="memberlist">
+
                   </ul>
                   <!-- /.users-list -->
                 </div>
@@ -430,7 +391,7 @@
           <div class="box box-primary box-warning">
             <div class="box-header with-border">
               <i class="fa fa-calendar"></i>
-              <h3 class="box-title">Calendar</h3>
+              <h3 class="box-title">Birthday Reminder</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -439,67 +400,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <ul class="products-list product-list-in-box">
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Sivakavi</a>
-                        <span class="product-description">
-                          Today birthday
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Michle</a>
-                        <span class="product-description">
-                          Today birthday
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">John</a>
-                        <span class="product-description">
-                          Today birthday
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Chandiran</a>
-                        <span class="product-description">
-                          Today birthday
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Chandiran</a>
-                        <span class="product-description">
-                          Today birthday
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
+              <ul class="products-list product-list-in-box" id="birthdayreminder">
+
               </ul>
             </div>
             <!-- /.box-body -->
@@ -512,7 +414,7 @@
 
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Browser Usage</h3>
+              <h3 class="box-title">Customer Chart</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -530,13 +432,8 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
+                  <ul class="chart-legend clearfix" id="chartmembertypelist">
+                    
                   </ul>
                 </div>
                 <!-- /.col -->
@@ -545,13 +442,8 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">United States of America
-                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                </li>
-                <li><a href="#">China
-                  <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
+              <ul id="perchartmembertypelist" style="list-style:none;padding-left: 0px !important;margin-bottom:0px !important;">
+                
               </ul>
             </div>
             <!-- /.footer -->
@@ -700,26 +592,7 @@ $(function () {
   // Get context with jQuery - using jQuery's .get() method.
   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
   var pieChart = new Chart(pieChartCanvas);
-  var PieData = [
-    {
-      value: 10,
-      color: "#f56954",
-      highlight: "#f56954",
-      label: "3 Months"
-    },
-    {
-      value: 2,
-      color: "#00a65a",
-      highlight: "#00a65a",
-      label: "6 Months"
-    },
-    {
-      value: 7,
-      color: "#f39c12",
-      highlight: "#f39c12",
-      label: "12 Months"
-    },
-  ];
+  var PieData = [];
   var pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
@@ -742,13 +615,13 @@ $(function () {
     // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
     maintainAspectRatio: false,
     //String - A legend template
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
+    //legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
     //String - A tooltip template
-    tooltipTemplate: "<%=value %> <%=label%> users"
+    tooltipTemplate: "<%=label%> users count -- <%=value %>"
   };
   //Create pie or douhnut chart
   // You can switch between pie and douhnut using the method below.
-  pieChart.Doughnut(PieData, pieOptions);
+  //pieChart.Doughnut(PieData, pieOptions);
   //-----------------
   //- END PIE CHART -
   //-----------------  
@@ -756,11 +629,115 @@ $(function () {
 
   function loadlasteightmember(){
     $.get(domainUrl + 'customer/getlasteightcustomer', function(res, status){
+
+      $("#memberlist").empty();
+      $("#membercount").empty();
+      $("#membercount").append(res.length+' New Members');
+
+      for (var i = 0; i < res.length; i++) {
+        $("#memberlist").append('<li><a href="singlecustomer.html?cid='+ res[i].cid +'"><img src="'+res[i].cphoto+'" alt="Customer Image"></a>'+
+                                '<a class="users-list-name" style="color:#3c8dbc;" href="singlecustomer.html?cid='+ res[i].cid +'">'+ res[i].fname +' '+ res[i].lname +
+                                '</a><span class="users-list-date">'+ moment(res[i].joindate).format("YYYY-MM-DD") +'</span></li>');
+      }
+
       
     }).fail(function(){
       toastr.error('Please check Network...','Error...')
     });
   }
+
+  function loadBirthdayReminder(){
+    var today = new Date();
+    var month = today.getMonth()+1;
+    $.get(domainUrl + 'customer/getallthismonthbirthdaycustomer?month='+month, function(res, status){
+
+      $("#birthdayreminder").empty();
+      
+      for (var i = 0; i < res.length; i++) {
+        var x = moment(res[i].dob).format("DD")-today.getDate();
+        $("#birthdayreminder").append('<li class="item"><a href="singlecustomer.html?cid='+ res[i].cid +'"><div class="product-img"><img src="'+ res[i].cphoto +'" alt="Customer Image">'
+                  +'</div></a><div class="product-info"><a href="singlecustomer.html?cid='+ res[i].cid +'" class="product-title">'+
+                  res[i].fname +' '+ res[i].lname +'</a><span class="product-description">'+
+                  moment(res[i].dob).format("YYYY-MM-DD") +'</span><span>'+ x +' days more...</span></div></li>');
+      }
+      
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  function loadChart(){
+    $.get(domainUrl + 'customer/getmembertypechart', function(res, status){
+      $("#chartmembertypelist").empty();
+      $("#perchartmembertypelist").empty();
+      var x = 0;
+      for (var i = 0; i < res.length; i++) {
+        x += res[i].value;
+      }
+
+      for (var i = 0; i < res.length; i++) {
+        var z = (res[i].value / x) * 100;
+        $("#chartmembertypelist").append('<li><i class="fa fa-circle-o" style="color:'+ res[i].color +'"></i> '+ res[i].label +'</li>');
+        $("#perchartmembertypelist").append('<li style="padding: 10px 10px;border-bottom: 1px solid #ccc;">'+
+        '<span>'+ res[i].label +'</span> <span class="pull-right text-yellow">'+ z + '%</span></a></li>');
+      }
+
+      PieData=res;
+      pieChart.Doughnut(PieData, pieOptions);
+      
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  function loadAllCustomer(){
+    $.get(domainUrl + 'customer/getallcustomer', function(res, status){
+      $("#allcustomer").empty();
+      $("#allcustomer").append(res.length);
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  function loadExpiredCustomer(){
+    var today = new Date();
+    var t = moment(today).format("YYYY-MM-DD")
+    $.get(domainUrl + 'customer/getallexpiredcustomer?today='+ today, function(res, status){
+      $("#expiredcustomer").empty();
+      $("#expiredcustomer").append(res.length);
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  function loadThisMonthExpiredCustomer(){
+    var today = new Date();
+    var month = today.getMonth()+1;
+    var year = today.getYear();
+    $.get(domainUrl + 'customer/getallthismonthexpirecustomer?year='+ year +'&month='+ month, function(res, status){
+      $("#thismonthexpire").empty();
+      $("#thismonthexpire").append(res.length);
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  function loadPaymentDueCustomer(){
+    $.get(domainUrl + 'customer/getallbalanceduecustomer', function(res, status){
+      $("#paymentduecustomer").empty();
+      $("#paymentduecustomer").append(res.length);
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  loadlasteightmember();
+  loadBirthdayReminder();
+  loadChart();
+  loadAllCustomer();
+  loadExpiredCustomer();
+  loadThisMonthExpiredCustomer();
+  loadPaymentDueCustomer();
 
   
 });
