@@ -285,95 +285,13 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <ul class="todo-list">
-                <li>
-                  <!-- drag handle -->
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <!-- checkbox -->
-                  <input type="checkbox" value="">
-                  <!-- todo text -->
-                  <span class="text">Design a nice theme</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Make the theme responsive</span>
-                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Check your messages and notifications</span>
-                  <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
+              <ul class="todo-list" id="opentodolist">
+                
               </ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+              <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#addtodolist"><i class="fa fa-plus"></i> Add item</button>
             </div>
           </div>
           <!-- /.box -->
@@ -460,6 +378,97 @@
   </footer>
 </div>
 <!-- ./wrapper -->
+
+<!-- Add Modal -->
+<div class="modal fade" id="addtodolist" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Add ToDo
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="addtodoname">Todo Name</label>
+                      <input type="text" class="form-control"
+                      id="addtodoname" placeholder="Enter Todo Name"/>
+                  </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="button" id="addtodobtn" class="btn btn-primary">
+                    Save Todo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edittodolist" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Edit ToDo
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form role="form">
+
+                  <div class="form-group" style="display:none;">
+                    <label for="edittodoid">Todo ID</label>
+                      <input type="text" class="form-control"
+                      id="edittodoid" placeholder="Enter Todo ID"/>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="edittodoname">Todo Name</label>
+                      <input type="text" class="form-control"
+                      id="edittodoname" placeholder="Enter Todo Name"/>
+                  </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="button" id="edittodobtn" class="btn btn-primary">
+                    Edit Todo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- jQuery 2.2.3 -->
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -736,8 +745,113 @@ $(function () {
   loadThisMonthExpiredCustomer();
   loadPaymentDueCustomer();
 
-  
+  function loadTodoList(){
+    $.get(domainUrl + 'todo/getallopentodo', function(res, status){
+
+      $("#opentodolist").empty();
+      
+      for (var i = 0; i < res.length; i++) {
+        $("#opentodolist").append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span>'
+                  +'<span class="text">'+ res[i].todoname +'</span><small class="label label-success"><i class="fa fa-clock-o"></i> '+ moment(res[i].createdat).format("YYYY-MM-DD HH:mm:ss") +'</small>'
+                  +'<div class="tools"><i class="fa fa-edit" onclick="todoedit('+ res[i].todoid +')"></i><i class="fa fa-check-square-o" onclick="todostatuschange('+ res[i].todoid +')"></i></div></li>');
+      }
+      
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  loadTodoList();
+
+
+  $("#addtodobtn").click(function(){
+      var today = new Date();
+      var params = {
+                  todoname: $("#addtodoname").val(),
+                  createdat:moment(today).format("YYYY-MM-DD HH:mm:ss"),
+                  updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
+                }
+
+                $.post(domainUrl + 'todo/addtodo',params, function(res, status){
+                  if(res=="success"){
+                    toastr.success('Added Successfully...!', 'ToDo')
+                    $("#addtodoname").val("");
+                    loadTodoList();
+                    $('#addtodolist').modal('hide');
+                  }else{
+                    //alert("Error.....");
+                    toastr.success('Error...!', 'ToDo')
+                  }
+                }).fail(function(){
+                    toastr.error('Please check Network...','Error...')
+                });
+    });
+
+    $("#edittodobtn").click(function(){
+      var today = new Date();
+      var params = {
+                  todoid: $("#edittodoid").val(),
+                  todoname: $("#edittodoname").val(),
+                  updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
+                }
+
+                $.post(domainUrl + 'todo/edittodo',params, function(res, status){
+                  if(res=="success"){
+                    toastr.success('Edit Successfully...!', 'ToDo')
+                    $("#edittodoid").val("");
+                    $("#edittodoname").val("");
+                    loadTodoList();
+                    $('#edittodolist').modal('hide');
+                  }else{
+                    //alert("Error.....");
+                    toastr.success('Error...!', 'ToDo')
+                  }
+                }).fail(function(){
+                    toastr.error('Please check Network...','Error...')
+                });
+    });
+
 });
+
+
+function loadTodoListAfter(){
+    $.get(domainUrl + 'todo/getallopentodo', function(res, status){
+
+      $("#opentodolist").empty();
+      
+      for (var i = 0; i < res.length; i++) {
+        $("#opentodolist").append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span>'
+                  +'<span class="text">'+ res[i].todoname +'</span><small class="label label-success"><i class="fa fa-clock-o"></i> '+ moment(res[i].createdat).format("YYYY-MM-DD HH:mm:ss") +'</small>'
+                  +'<div class="tools"><i class="fa fa-edit" onclick="todoedit('+ res[i].todoid +')"></i><i class="fa fa-check-square-o" onclick="todostatuschange('+ res[i].todoid +')"></i></div></li>');
+      }
+      
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+    function todostatuschange(x){
+
+      if(confirm("Do you want to move this todo to finish state ?")){
+        $.get(domainUrl + 'todo/closetodo?todoid='+ x, function(res, status){
+             toastr.success('Status changed Successfully...!', 'ToDo')
+             loadTodoListAfter();
+        }).fail(function(){
+            toastr.error('Please check Network...','Error...')
+        });
+        
+      }
+    }
+
+    function todoedit(x){
+      $.get(domainUrl + 'todo/gettodobyid?todoid='+ x, function(res, status){
+             $("#edittodoid").val(res[0].todoid);
+             $("#edittodoname").val(res[0].todoname);
+             $('#edittodolist').modal('show');
+        }).fail(function(){
+            toastr.error('Please check Network...','Error...')
+        });
+    }
   
 </script>
 
