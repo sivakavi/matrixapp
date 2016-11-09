@@ -17,6 +17,8 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -68,6 +70,8 @@
 <!-- AdminLTE App -->
 <script src="js/app.min.js"></script>
 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <script>
   $(function () {
     $('input').iCheck({
@@ -92,24 +96,51 @@
                   password: this.password
                 }
                 $.post(url, params, function(data, status){
-                  //alert("Data: " + data + "\nStatus: " + status);
                     if ( data == "success" ) {
                       var url = domainUrl + 'user/getuserbyusername?username=' + params.username;
                       $.get(url, function(data, status){
-                          console.log(data);
-                          window.location.href = 'pages/dashboard.html';
                           localStorage.setItem('userid', data[0].userid);
                           localStorage.setItem('fname', data[0].fname);
                           localStorage.setItem('lname', data[0].lname);
+                          
                           if(data[0].userrole==1)
                             localStorage.setItem('userrole', "ADMIN");
                           else
                             localStorage.setItem('userrole', "STAFF");
+                          
                           localStorage.setItem('username', data[0].username);
-                          localStorage.setItem('profileimage', data[0].profileimage);
+
+                          var profilephoto='';
+                          if(data[0].profileimage==" "){
+                              profilephoto = "../img/default.png";
+                          }else{
+                              profilephoto = data[0].profileimage;
+                          }
+
+                          console.log(profilephoto);
+
+                          localStorage.setItem('profileimage', profilephoto);
+
                           localStorage.setItem('createdat', data[0].createdat.substring(0, 10));
+                          
+                          toastr.success('You are logged in successfully...','Login Success...')
+
+                          setTimeout(function(){
+                             window.location.href = 'pages/dashboard.html';
+                          }, 1500);
+
+                          
+                          
                       });
+                    }else if( data == "fail" ){
+                      toastr.error('Please check Username and Password...','Login Error...')
+                    }else if( data == "noactive" ){
+                      toastr.warning('You are not active. Please contact ADMIN...','Not Active...')
+                    }else{
+                      
                     }
+                }).fail(function(){
+                    toastr.error('Please check Network...','Error...')
                 });
             }
         }

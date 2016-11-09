@@ -104,7 +104,7 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
-          <li class="treeview active">
+          <li class="treeview">
             <a href="#">
               <i class="fa fa-user"></i>
               <span>Customer</span>
@@ -116,7 +116,7 @@
               <li><a href="addcustomer.html"><i class="fa fa-plus"></i> Add Customer</a></li>
               <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
               <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
-              <li class="active"><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
+              <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
               <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
               <li><a href="comingsoonexpirecustomer.html"><i class="fa fa-minus-square-o"></i> Coming Soon Expire Customer</a></li>
             </ul>
@@ -134,7 +134,7 @@
               <li><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
             </ul>
           </li>
-          <li class="treeview" v-if="seen">
+          <li class="treeview active" v-if="seen">
             <a href="#">
               <i class="fa fa-user"></i>
               <span>Staff</span>
@@ -145,7 +145,7 @@
             <ul class="treeview-menu">
               <li><a href="addstaff.html"><i class="fa fa-plus"></i> Add Staff</a></li>
               <li><a href="editstaff.html"><i class="fa fa-edit"></i> Edit Staff</a></li>
-              <li><a href="stafflist.html"><i class="fa fa-list-alt"></i> Staff List</a></li>
+              <li class="active"><a href="stafflist.html"><i class="fa fa-list-alt"></i> Staff List</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -192,28 +192,24 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>Expired Customer List</h1>
+        <h1>All Staff List</h1>
         <ol class="breadcrumb">
           <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <li class="active">Expired Customer List</li>
+          <li class="active">Staff List</li>
         </ol>
       </section>
 
       <!-- Main content -->
       <section class="content">
         <div style="background:#fff;padding:20px;">
-        <table id="expiredcustomerlist" class="table table-bordered table-striped">
+        <table id="stafflist" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>Photo</th>
-                      <th>ID</th>
                       <th>Name</th>
                       <th>Mobile</th>
-                      <th>Membertype</th>
-                      <th>Gymtype</th>
-                      <th>Join Date</th>
-                      <th>Start Date</th>
-                      <th>Expire Date</th>
+                      <th>Role</th>
+                      <th>Active</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -255,6 +251,71 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <script>
+
+  function loadStaffList(){
+
+        $.get(domainUrl + 'user/getalluser', function(res, status){
+
+        $("#stafflist").DataTable({
+          responsive: true,
+          data: res,
+          columns: [
+            {"data": "profileimage",
+              render: function ( data, type, obj ) {
+                if (data != null && obj.profileimage != null && obj.profileimage != "" && obj.profileimage != " ") {
+                  return '<img src="'+ data +'" alt="profile img" style="width:30px; height:30px;"/>';
+                }else{
+                  return'<img src="../img/default.png" alt="profile img" style="width:30px; height:30px;"/>';
+                }
+              },
+              "sClass":"alncenter"
+            },
+            {"data":"fname",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return '<a href="singlestaff.html?userid='+obj.userid+'">'+ data +' '+ obj.lname +'</a>';
+                }
+              }
+            },
+            {"data":"phone",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data":"userrole",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  if(data == 1)
+                    return "ADMIN";
+                  else if(data == 2)
+                    return "STAFF";
+                  else
+                    return "----";
+                }
+              }
+            },
+            {"data":"active",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                    if(data == 1)
+                        return '<span style="color:red;font-size:25px;cursor: pointer;"><i class="fa fa-minus-circle" onclick="changetodeactive('+ obj.userid +')"></i></span>';
+                    else if(data == 0)
+                        return '<span style="color:green;font-size:25px;cursor: pointer;"><i class="fa fa-check" onclick="changetoactive('+ obj.userid +')"></i></span>';
+                    else
+                        return data;
+                }
+              },
+              "sClass":"alncenter"
+            }
+            ]
+        });
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
   $(function () {
 
     var us = true;
@@ -314,93 +375,45 @@
   });
 
 
-  function loadExpiredCustomerList(){
-
-    var today = new Date();
-    var t = moment(today).format("YYYY-MM-DD");
-    $.get(domainUrl + 'customer/getallexpiredcustomer?today='+ t, function(res, status){
-
-        $("#expiredcustomerlist").DataTable({
-          responsive: true,
-          data: res,
-          columns: [
-            {"data": "cphoto",
-              render: function ( data, type, obj ) {
-                if (data != null && obj.cphoto != null && obj.cphoto != "" && obj.cphoto != " ") {
-                  return '<img src="'+ data +'" alt="profile img" style="width:30px; height:30px;"/>';
-                }else{
-                  return'<img src="../img/default.png" alt="profile img" style="width:30px; height:30px;"/>';
-                }
-              },
-              "sClass":"alncenter"
-            },
-            {"data":"cid",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +'</a>';
-                }
-              }
-            },
-            {"data":"fname",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +' '+ obj.lname +'</a>';
-                }
-              }
-            },
-            {"data":"phone",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"membertypename",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"gymtypename",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"joindate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            },
-            {"data":"startdate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            },
-            {"data":"enddate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            }
-            ]
-        });
-    }).fail(function(){
-      toastr.error('Please check Network...','Error...')
-    });
-  }
-
-
-  loadExpiredCustomerList();
+  loadStaffList();
 
   });
+
+  function loadStaff(){
+
+    $.get(domainUrl + 'user/getalluser', function(res, status){
+      $('#stafflist').dataTable().fnClearTable();
+      $('#stafflist').dataTable().fnAddData(res);
+    }).fail(function(){
+         toastr.error('Please check Network...','Error...')
+    });
+
+  }
+
+  function changetodeactive(x){
+     
+      if(confirm("Do you want to block this user ?")){
+        $.get(domainUrl + 'user/activechange?userid='+ x +'&active=0', function(res, status){
+             toastr.success('User Blocked Successfully...!', 'User Active')
+             loadStaff();
+        }).fail(function(){
+            toastr.error('Please check Network...','Error...')
+        });
+        
+      }
+  }
+
+  function changetoactive(x){
+      if(confirm("Do you want to unblock this user ?")){
+        $.get(domainUrl + 'user/activechange?userid='+ x +'&active=1', function(res, status){
+             toastr.success('User Unblocked Successfully...!', 'User Active')
+             loadStaff();
+        }).fail(function(){
+            toastr.error('Please check Network...','Error...')
+        });
+        
+      }
+  }
 </script>
 </body>
 

@@ -30,8 +30,8 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <style>
-    .alncenter{
-      text-align:center;
+    .padleft25 {
+      padding-left: 25px
     }
   </style>
 </head>
@@ -104,7 +104,7 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
-          <li class="treeview active">
+          <li class="treeview">
             <a href="#">
               <i class="fa fa-user"></i>
               <span>Customer</span>
@@ -116,7 +116,7 @@
               <li><a href="addcustomer.html"><i class="fa fa-plus"></i> Add Customer</a></li>
               <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
               <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
-              <li class="active"><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
+              <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
               <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
               <li><a href="comingsoonexpirecustomer.html"><i class="fa fa-minus-square-o"></i> Coming Soon Expire Customer</a></li>
             </ul>
@@ -134,7 +134,7 @@
               <li><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
             </ul>
           </li>
-          <li class="treeview" v-if="seen">
+          <li class="treeview active" v-if="seen">
             <a href="#">
               <i class="fa fa-user"></i>
               <span>Staff</span>
@@ -143,7 +143,7 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="addstaff.html"><i class="fa fa-plus"></i> Add Staff</a></li>
+              <li class="active"><a href="addstaff.html"><i class="fa fa-plus"></i> Add Staff</a></li>
               <li><a href="editstaff.html"><i class="fa fa-edit"></i> Edit Staff</a></li>
               <li><a href="stafflist.html"><i class="fa fa-list-alt"></i> Staff List</a></li>
             </ul>
@@ -192,35 +192,103 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>Expired Customer List</h1>
+        <h1>Add Staff</h1>
         <ol class="breadcrumb">
-          <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <li class="active">Expired Customer List</li>
+          <li><a href="dashboard.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+          <li class="active">Add Staff</li>
         </ol>
       </section>
 
       <!-- Main content -->
       <section class="content">
-        <div style="background:#fff;padding:20px;">
-        <table id="expiredcustomerlist" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Photo</th>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Mobile</th>
-                      <th>Membertype</th>
-                      <th>Gymtype</th>
-                      <th>Join Date</th>
-                      <th>Start Date</th>
-                      <th>Expire Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+        <div class="row" style="background:#fff;padding:20px;">
 
-                  </tbody>
-                </table>
-          </div>
+          <form class="form-horizontal" id="addstaff">
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="ufname">First Name</label>
+                <input type="text" class="form-control" id="ufname" placeholder="Enter First Name">
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="ulname">Last Name</label>
+                <input type="text" class="form-control" id="ulname" placeholder="Enter Last Name">
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="uemail">Email address</label>
+                <input type="email" id="uemail" class="form-control" placeholder="Enter email">
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="uphone">Mobile Number</label>
+                <input type="email" class="form-control" id="uphone" placeholder="Enter Mobile Number">
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="uaddress">Address</label>
+                <textarea class="form-control" id="uaddress" rows="4"></textarea>
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="uusername">User Name</label>
+                <input type="text" class="form-control" id="uusername" placeholder="Enter User Name">
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <fieldset class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <legend>Active</legend>
+                <div class="form-check">
+                  <label class="form-check-label">
+                        <input type="radio" class="form-check-input uactive" name="optionsactive" id="udeactive" value="0" checked>
+                        No
+                    </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                        <input type="radio" class="form-check-input uactive" name="optionsactive" id="uactive" value="1">
+                        Yes
+                    </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="row padleft25">
+              <fieldset class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <legend>User Role</legend>
+                <div class="form-check">
+                  <label class="form-check-label">
+                        <input type="radio" class="form-check-input uuserrole" name="optionsuserrole" id="ustaff" value="2" checked>
+                        Staff
+                    </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                        <input type="radio" class="form-check-input uuserrole" name="optionsuserrole" id="uadmin" value="1">
+                        Admin
+                    </label>
+                </div>
+              </fieldset>
+            </div>
+          </form>
+          <br/>
+          <br/>
+
+          <button class="btn bg-maroon btn-flat" id="addstaffbtn">Add Staff</button>
+
+        </div>
       </section>
       <!-- /.content -->
     </div>
@@ -313,92 +381,74 @@
     window.location.href = '../index.html';
   });
 
+  
+  // setTimeout(function(){
+     
+  // }, 10000);
 
-  function loadExpiredCustomerList(){
+
+  $("#addstaffbtn").click(function(){
+    var fname = $("#ufname").val();
+    var lname = $("#ulname").val();
+    var email = $("#uemail").val();
+    var phone = $("#uphone").val();
+    var address = $("#uaddress").val();
+    var username = $("#uusername").val();
+    var active = $('input[name=optionsactive]:checked', '#addstaff').val();
+    var userrole = $('input[name=optionsuserrole]:checked', '#addstaff').val();
 
     var today = new Date();
-    var t = moment(today).format("YYYY-MM-DD");
-    $.get(domainUrl + 'customer/getallexpiredcustomer?today='+ t, function(res, status){
 
-        $("#expiredcustomerlist").DataTable({
-          responsive: true,
-          data: res,
-          columns: [
-            {"data": "cphoto",
-              render: function ( data, type, obj ) {
-                if (data != null && obj.cphoto != null && obj.cphoto != "" && obj.cphoto != " ") {
-                  return '<img src="'+ data +'" alt="profile img" style="width:30px; height:30px;"/>';
-                }else{
-                  return'<img src="../img/default.png" alt="profile img" style="width:30px; height:30px;"/>';
+    if(fname == "" || fname == null){
+      alert("Please enter first name....")
+    }else if(lname == "" || lname == null){
+      alert("Please enter last name....")
+    }else if(email == "" || email == null){
+      alert("Please enter email....")
+    }else if(phone == "" || phone == null){
+      alert("Please enter phone number....")
+    }else if(address == "" || address == null){
+      alert("Please enter address....")
+    }else if(username == "" || username == null){
+      alert("Please enter user name....")
+    }else{
+       var params = {
+                  fname: fname,
+                  lname: lname,
+                  email:email,
+                  phone:phone,
+                  address: address,
+                  username:username,
+                  active:active,
+                  userrole:userrole,
+                  updatedby:localStorage.getItem("userid"),
+                  createdat:moment(today).format("YYYY-MM-DD HH:mm:ss"),
+                  updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
                 }
-              },
-              "sClass":"alncenter"
-            },
-            {"data":"cid",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +'</a>';
-                }
-              }
-            },
-            {"data":"fname",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +' '+ obj.lname +'</a>';
-                }
-              }
-            },
-            {"data":"phone",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"membertypename",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"gymtypename",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"joindate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            },
-            {"data":"startdate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            },
-            {"data":"enddate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            }
-            ]
-        });
-    }).fail(function(){
-      toastr.error('Please check Network...','Error...')
-    });
-  }
 
+                $.post(domainUrl + 'user/adduser',params, function(res, status){
+                  if(res=="success"){
+                    toastr.success('Added Successfully...!', 'Staff')
+                    $("#ufname").val("");
+                    $("#ulname").val("");
+                    $("#uemail").val("");
+                    $("#uphone").val("");
+                    $("#uaddress").val("");
+                    $("#uusername").val("");
+                    $("#udeactive").prop("checked", true)
+                    $("#ustaff").prop("checked", true)
+                  }else{
+                    toastr.success('Error...!', 'Staff')
+                  }
+                }).fail(function(){
+                    toastr.error('Please check Network...','Error...')
+                });
 
-  loadExpiredCustomerList();
+      
+    }
+
+    
+  });
 
   });
 </script>

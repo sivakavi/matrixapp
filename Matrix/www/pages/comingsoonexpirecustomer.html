@@ -328,10 +328,10 @@
           columns: [
             {"data": "cphoto",
               render: function ( data, type, obj ) {
-                if (data != null || obj.photo != null) {
+                if (data != null && obj.cphoto != null && obj.cphoto != "" && obj.cphoto != " ") {
                   return '<img src="'+ data +'" alt="profile img" style="width:30px; height:30px;"/>';
                 }else{
-                  return'<img src="../img/avatar.png" alt="profile img" style="width:30px; height:30px;"/>';
+                  return'<img src="../img/default.png" alt="profile img" style="width:30px; height:30px;"/>';
                 }
               },
               "sClass":"alncenter"
