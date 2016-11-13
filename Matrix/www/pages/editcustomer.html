@@ -218,28 +218,28 @@
 
             <div class="row padleft25">
               <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
-                <label for="ccid">Customer ID</label>
+                <label for="ccid">Customer ID <span style="color:red;"> * </span></label>
                 <input type="text" class="form-control" id="ccid" placeholder="Enter Customer ID" readonly>
               </div>
             </div>
 
             <div class="row padleft25">
               <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
-                <label for="cfname">First Name</label>
+                <label for="cfname">First Name <span style="color:red;"> * </span></label>
                 <input type="text" class="form-control" id="cfname" placeholder="Enter First Name">
               </div>
             </div>
 
             <div class="row padleft25">
               <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
-                <label for="clname">Last Name</label>
+                <label for="clname">Last Name <span style="color:red;"> * </span></label>
                 <input type="text" class="form-control" id="clname" placeholder="Enter Last Name">
               </div>
             </div>
 
             <div class="row padleft25">
               <fieldset class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
-                <legend>Gender</legend>
+                <legend>Gender <span style="color:red;"> * </span></legend>
                 <div class="form-check">
                   <label class="form-check-label">
                         <input type="radio" class="form-check-input cgender" name="optionsgender" id="cmale" value="Male">
@@ -276,7 +276,7 @@
 
             <div class="row padleft25">
               <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
-                <label for="cphone">Mobile Number</label>
+                <label for="cphone">Mobile Number <span style="color:red;"> * </span></label>
                 <input type="text" class="form-control" id="cphone" placeholder="Enter Mobile Number">
               </div>
             </div>
@@ -285,6 +285,13 @@
               <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
                 <label for="caddress">Address</label>
                 <textarea class="form-control" id="caddress" rows="4"></textarea>
+              </div>
+            </div>
+
+            <div class="row padleft25">
+              <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-6">
+                <label for="coccupation">Occupation</label>
+                <input type="text" class="form-control" id="coccupation" placeholder="Enter Occupation">
               </div>
             </div>
 
@@ -437,12 +444,12 @@
         $("#cemail").val(res[0].email);
         $("#cphone").val(res[0].phone);
         $("#caddress").val(res[0].address);
+        $("#coccupation").val(res[0].occupation);
         $("#cheight").val(res[0].height);
         $("#cweight").val(res[0].weight);
         $("#cthighsize").val(res[0].thighsize);
         $("#cbicepsize").val(res[0].bicepsize);
         $("#ccalfsize").val(res[0].calfsize);
-
         $("#datepicker").datepicker("setDate", moment(res[0].dob).format("YYYY-MM-DD"));
         $("input[name=optionsgender][value='"+res[0].gender+"']").prop("checked",true);
       
@@ -451,11 +458,6 @@
     });
       
   }
-
-  
-  // setTimeout(function(){
-     
-  // }, 10000);
 
   //auto complete
     var dataSource = [];
@@ -488,8 +490,101 @@
 
 
   $("#editcustomerbtn").click(function(){
-    
-    
+      
+        var cid =  $("#ccid").val();
+        var fname = $("#cfname").val();
+        var lname = $("#clname").val();
+        var email = $("#cemail").val();
+        var phone = $("#cphone").val();
+        var address = $("#caddress").val();
+        var occupation = $("#coccupation").val();
+        var height = $("#cheight").val();
+        var weight = $("#cweight").val();
+        var thighsize = $("#cthighsize").val();
+        var bicepsize = $("#cbicepsize").val();
+        var calfsize = $("#ccalfsize").val();
+        var gender = $('input[name=optionsgender]:checked', '#editcustomer').val();
+        var dob = $('#datepicker').val();
+
+        var today = new Date();
+
+        if(fname == "" || fname == null){
+          alert("Please enter first name....")
+        }else if(lname == "" || lname == null){
+          alert("Please enter last name....")
+        }
+        // else if(email == "" || email == null){
+        //   alert("Please enter email....")
+        // }
+        else if(phone == "" || phone == null){
+          alert("Please enter phone number....")
+        }
+        // else if(address == "" || address == null){
+        //   alert("Please enter address....")
+        // }
+        // else if(height == "" || height == null){
+        //   alert("Please enter height....")
+        // }else if(weight == "" || weight == null){
+        //   alert("Please enter weight....")
+        // }else if(thighsize == "" || thighsize == null){
+        //   alert("Please enter thigh size....")
+        // }else if(bicepsize == "" || bicepsize == null){
+        //   alert("Please enter bicep size....")
+        // }else if(calfsize == "" || calfsize == null){
+        //   alert("Please enter calf size....")
+        // }else if(dob == "" || dob == null){
+        //   alert("Please enter dob....")
+        // }
+        else{
+          var params = {
+                  cid: cid,
+                  fname: fname,
+                  lname: lname,
+                  gender:gender,
+                  dob:dob,
+                  address: address,
+                  phone: phone,
+                  email: email,
+                  occupation: occupation,
+                  updatedby:localStorage.getItem("userid"),
+                  updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss"),
+                  height: height,
+                  weight: weight,
+                  thighsize: thighsize,
+                  bicepsize:bicepsize,
+                  calfsize:calfsize
+                }
+
+                //console.log(params)
+
+                $.post(domainUrl + 'customer/editcustomer',params, function(res, status){
+                  if(res=="success"){
+                    toastr.success('Edited Successfully...!', 'Customer')
+                    
+                    $("#ccid").val("");
+                    $("#cfname").val("");
+                    $("#clname").val("");
+                    $("#cemail").val("");
+                    $("#cphone").val("");
+                    $("#caddress").val("");
+                    $("#coccupation").val("");
+                    $("#cheight").val("");
+                    $("#cweight").val("");
+                    $("#cthighsize").val("");
+                    $("#cbicepsize").val("");
+                    $("#ccalfsize").val("");
+                    $("#datepicker").datepicker("setDate", "");
+                    $("#cmale").prop("checked", true)
+                    $("#customerautocomplete").val("");
+                    
+                  }else{
+                    toastr.success('Error...!', 'Customer')
+                  }
+                }).fail(function(){
+                    toastr.error('Please check Network...','Error...')
+                });
+        }
+
   });
 
   });

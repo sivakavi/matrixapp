@@ -640,7 +640,11 @@ $(function () {
       $("#membercount").append(res.length+' New Members');
 
       for (var i = 0; i < res.length; i++) {
-        $("#memberlist").append('<li><a href="singlecustomer.html?cid='+ res[i].cid +'"><img src="'+res[i].cphoto+'" alt="Customer Image"></a>'+
+        var cphoto = res[i].cphoto;
+        if(cphoto=="" || cphoto==" ")
+          cphoto = "../img/default.png";
+
+        $("#memberlist").append('<li><a href="singlecustomer.html?cid='+ res[i].cid +'"><img src="'+cphoto+'" alt="Customer Image"></a>'+
                                 '<a class="users-list-name" style="color:#3c8dbc;" href="singlecustomer.html?cid='+ res[i].cid +'">'+ res[i].fname +' '+ res[i].lname +
                                 '</a><span class="users-list-date">'+ moment(res[i].joindate).format("YYYY-MM-DD") +'</span></li>');
       }
@@ -684,7 +688,7 @@ $(function () {
         var z = (res[i].value / x) * 100;
         $("#chartmembertypelist").append('<li><i class="fa fa-circle-o" style="color:'+ res[i].color +'"></i> '+ res[i].label +'</li>');
         $("#perchartmembertypelist").append('<li style="padding: 10px 10px;border-bottom: 1px solid #ccc;">'+
-        '<span>'+ res[i].label +'</span> <span class="pull-right text-yellow">'+ z + '%</span></a></li>');
+        '<span>'+ res[i].label +'</span> <span class="pull-right text-yellow">'+ z.toFixed(2) + ' %</span></a></li>');
       }
 
       PieData=res;
