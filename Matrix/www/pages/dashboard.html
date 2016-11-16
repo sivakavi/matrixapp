@@ -153,7 +153,6 @@
               <li><a href="newbill.html"><i class="fa fa-plus"></i> New Bill</a></li>
               <li><a href="balancebill.html"><i class="fa fa-edit"></i> Balance Bill</a></li>
               <li><a href="renewalbill.html"><i class="fa fa-list-alt"></i> Renewal Bill</a></li>
-              <li><a href="upgradebill.html"><i class="fa fa-list-alt"></i> Upgrade Bill</a></li>
             </ul>
           </li>
           <li class="treeview" v-if="seen">
@@ -658,13 +657,19 @@ $(function () {
   function loadBirthdayReminder(){
     var today = new Date();
     var month = today.getMonth()+1;
-    $.get(domainUrl + 'customer/getallthismonthbirthdaycustomer?month='+month, function(res, status){
+    var day = moment(today).format("DD");
+    $.get(domainUrl + 'customer/getallthismonthbirthdaycustomer?month='+month+'&day='+day, function(res, status){
 
       $("#birthdayreminder").empty();
       
       for (var i = 0; i < res.length; i++) {
+        var cphoto = res[i].cphoto;
+        if(cphoto=="" || cphoto==" ")
+          cphoto = "../img/default.png";
+        
         var x = moment(res[i].dob).format("DD")-today.getDate();
-        $("#birthdayreminder").append('<li class="item"><a href="singlecustomer.html?cid='+ res[i].cid +'"><div class="product-img"><img src="'+ res[i].cphoto +'" alt="Customer Image">'
+
+        $("#birthdayreminder").append('<li class="item"><a href="singlecustomer.html?cid='+ res[i].cid +'"><div class="product-img"><img src="'+ cphoto +'" alt="Customer Image">'
                   +'</div></a><div class="product-info"><a href="singlecustomer.html?cid='+ res[i].cid +'" class="product-title">'+
                   res[i].fname +' '+ res[i].lname +'</a><span class="product-description">'+
                   moment(res[i].dob).format("YYYY-MM-DD") +'</span><span>'+ x +' days more...</span></div></li>');
