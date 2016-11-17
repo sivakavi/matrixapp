@@ -422,7 +422,7 @@
 
     function loadinvoice(x){
 
-      $.get(domainUrl + 'customer/getinvoicecustomer?invoiceno='+x, function(res, status){
+      $.get(domainUrl + 'customer/getinvoice?invoiceno='+x, function(res, status){
           $("#cfname").append(res[0].fname);
           $("#clname").append(res[0].lname);
           $("#caddress").append(res[0].address);

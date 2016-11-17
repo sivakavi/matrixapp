@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Matrix Fitness</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../css/skins/_all-skins.min.css">
+
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini fixed">
+  <div class="wrapper" id="app-3">
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="dashboard.html" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>M F</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Matrix</b> Fitness</span>
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img class="user-image profileimage" alt="User Image">
+                <span class="hidden-xs uname"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img class="img-circle profileimage" alt="User Image">
+                  <p><span class="uname"></span> - <span class="userrole"></span><small>Member since <span class="createdat"></span></small></p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <button class="btn bg-purple margin">Profile</button>
+                  </div>
+                  <div class="pull-right">
+                    <button class="btn bg-purple margin logout">Sign out</button>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img class="img-circle profileimage" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p class="uname"></p>
+            <p class="userrole"></p>
+          </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+          <!--<li class="header">MAIN NAVIGATION</li>-->
+          <li>
+            <a href="dashboard.html">
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-user"></i>
+              <span>Customer</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="addcustomer.html"><i class="fa fa-plus"></i> Add Customer</a></li>
+              <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
+              <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
+              <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
+              <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
+              <li><a href="comingsoonexpirecustomer.html"><i class="fa fa-minus-square-o"></i> Coming Soon Expire Customer</a></li>
+            </ul>
+          </li>
+          <li class="treeview" v-if="seen">
+            <a href="#">
+              <i class="fa fa-cog"></i>
+              <span>Manage</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="membertype.html"><i class="fa fa-credit-card"></i> Member Type</a></li>
+              <li><a href="gymtype.html"><i class="fa fa-chain"></i> Gym Type</a></li>
+            </ul>
+          </li>
+          <li class="treeview" v-if="seen">
+            <a href="#">
+              <i class="fa fa-user"></i>
+              <span>Staff</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="addstaff.html"><i class="fa fa-plus"></i> Add Staff</a></li>
+              <li><a href="editstaff.html"><i class="fa fa-edit"></i> Edit Staff</a></li>
+              <li><a href="stafflist.html"><i class="fa fa-list-alt"></i> Staff List</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-rupee"></i>
+              <span>Bill</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="newbill.html"><i class="fa fa-plus"></i> New Bill</a></li>
+              <li><a href="balancebill.html"><i class="fa fa-edit"></i> Balance Bill</a></li>
+              <li><a href="renewalbill.html"><i class="fa fa-list-alt"></i> Renewal Bill</a></li>
+            </ul>
+          </li>
+          <li class="treeview" v-if="seen">
+            <a href="#">
+              <i class="fa fa-pie-chart"></i>
+              <span>Reports</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="#"><i class="fa fa-bar-chart"></i> Report 1</a></li>
+              <li><a href="#"><i class="fa fa-bar-chart"></i> Report 2</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="logout">
+              <i class="fa fa-power-off"></i> <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>Single Customer</h1>
+        <ol class="breadcrumb">
+          <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+          <li class="active">Single Customer</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+
+      <div class="row">
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle cphoto" alt="User profile picture">
+
+              <h3 class="profile-username text-center cname"></h3>
+
+              <p class="text-muted text-center ccid"></p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              
+              <strong><i class="fa fa-phone margin-r-5"></i> Mobile</strong>
+
+              <p class="text-muted cphone"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-envelope margin-r-5"></i> Email</strong>
+
+              <p class="text-muted cemail"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
+
+              <p class="text-muted caddress"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-user-plus margin-r-5"></i> Gender</strong>
+
+              <p class="text-muted cgender"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-calendar margin-r-5"></i> DOB</strong>
+
+              <p class="text-muted cdob"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-briefcase margin-r-5"></i> Occupation</strong>
+
+              <p class="text-muted coccupation"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-calendar margin-r-5"></i> Join Date</strong>
+
+              <p class="text-muted cjoindate"></p>
+
+              
+
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#information" data-toggle="tab">Information</a></li>
+              <li><a href="#bodyinformation" data-toggle="tab">Body Information</a></li>
+              <li><a href="#customermember" data-toggle="tab">Customer Member</a></li>
+              <li><a href="#invoice" data-toggle="tab">Invoice</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="information">
+                  <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="cgymtype" class="col-sm-2 control-label">Gym Type</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cgymtype">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cmembertype" class="col-sm-2 control-label">Member Type</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cmembertype">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cstartdate" class="col-sm-2 control-label">Start Date</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cstartdate">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cenddate" class="col-sm-2 control-label">End Date</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cenddate">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="camount" class="col-sm-2 control-label">Amount</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="camount">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cpaid" class="col-sm-2 control-label">Paid</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cpaid">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cbalance" class="col-sm-2 control-label">Balance</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cbalance">
+                    </div>
+                  </div>
+
+                </form>
+
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="bodyinformation">
+
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                    <label for="cheight" class="col-sm-2 control-label">Height</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cheight">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cweight" class="col-sm-2 control-label">Weight</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cweight">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cthighsize" class="col-sm-2 control-label">Thigh Size</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cthighsize">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cbicepsize" class="col-sm-2 control-label">Bicep Size</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cbicepsize">
+                    </div>
+                  </div>                                
+                  <div class="form-group">
+                    <label for="ccalfsize" class="col-sm-2 control-label">Calf Size</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ccalfsize">
+                    </div>
+                  </div>
+
+                  </form>
+
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="customermember">
+                  <table id="customermemberlist" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Membertype ID</th>
+                      <th>Amount</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="invoice">
+                  <table id="invoicelist" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Invoice No</th>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th>Paid</th>
+                      <th>Balance</th>
+                      <th>Invoice Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2016-2017 <a href="http://matrix-gym.in" target="_blank">Matrix Fitness</a>.</strong> All
+      rights reserved.
+    </footer>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery 2.2.3 -->
+  <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="../js/bootstrap.min.js"></script>
+  <!-- DataTables -->
+  <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <!-- Slimscroll -->
+  <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="../plugins/fastclick/fastclick.js"></script>
+  <script src="../plugins/vuejs/vue.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../js/app.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <script>
+  $(function () {
+
+    var us = true;
+    if(localStorage.getItem("userrole")=="STAFF")
+      us = false;
+
+      var app3 = new Vue({
+      el: '#app-3',
+      data: {
+      seen: us
+      }
+    });
+
+    var uname = new Vue({
+    el: '.uname',
+    data: {
+      uname: localStorage.getItem("fname")+" "+localStorage.getItem("lname")
+    }
+  });
+
+  var userrole = new Vue({
+    el: '.userrole',
+    data: {
+      userrole: localStorage.getItem("userrole")
+    }
+  });
+
+  var profileimage = new Vue({
+    el: '.profileimage',
+    data: {
+      profileimage: localStorage.getItem("profileimage")
+    }
+  });
+
+  var createdat = new Vue({
+    el: '.createdat',
+    data: {
+      createdat: localStorage.getItem("createdat")
+    }
+  });
+
+  $(".uname").text(localStorage.getItem("fname")+" "+localStorage.getItem("lname"));
+  $(".userrole").text(localStorage.getItem("userrole"));
+  $(".profileimage").attr('src', localStorage.getItem("profileimage"));
+  $(".createdat").text(localStorage.getItem("createdat"));
+
+
+  $(".logout").click(function(){
+    localStorage.setItem('userid', "");
+    localStorage.setItem('fname', "");
+    localStorage.setItem('lname', "");
+    localStorage.setItem('userrole', "");
+    localStorage.setItem('username', "");
+    localStorage.setItem('profileimage', "");
+    localStorage.setItem('createdat', "");
+    window.location.href = '../index.html';
+  });
+
+  function getParameterByName(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+  function loadCustomerMemberList(cid){
+
+        $.get(domainUrl + 'customer/getcustomermember?cid='+cid, function(res, status){
+
+        $("#customermemberlist").DataTable({
+          responsive: true,
+          data: res,
+          columns: [
+            {
+              "data": "membertypeid",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {
+              "data": "amount",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {
+              "data": "startdate",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return moment(data).format("YYYY-MM-DD");
+                }
+              }
+            },
+            {
+              "data": "enddate",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return moment(data).format("YYYY-MM-DD");
+                }
+              }
+            }
+
+            ]
+        });
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+  function loadInvoiceCustomer(cid){
+
+        $.get(domainUrl + 'customer/getinvoicecustomer?cid='+cid, function(res, status){
+
+        $("#invoicelist").DataTable({
+          responsive: true,
+          data: res,
+          columns: [
+            {"data": "invoiceno",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data": "description",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data": "amount",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data": "paid",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data": "balance",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return data;
+                }
+              }
+            },
+            {"data": "idate",
+              render: function ( data, type, obj ) {
+                if (data != null) {
+                  return moment(data).format("YYYY-MM-DD");
+                }
+              }
+            }
+
+            ]
+        });
+    }).fail(function(){
+      toastr.error('Please check Network...','Error...')
+    });
+  }
+
+
+  function loadsinglecustomer(x){
+    $.get(domainUrl + 'customer/getcustomerbyid?cid='+x, function(res, status){
+
+        $(".ccid").append(res[0].cid);
+        $(".cname").append(res[0].fname +" "+ res[0].lname);
+        $(".cemail").append(res[0].email);
+        $(".cphone").append(res[0].phone);
+        $(".caddress").append(res[0].address);
+        $(".coccupation").append(res[0].occupation);
+        $(".cgender").append(res[0].gender);
+        $(".cdob").append(moment(res[0].dob).format("YYYY-MM-DD"));
+        $(".cjoindate").append(moment(res[0].joindate).format("YYYY-MM-DD"));
+
+        $("#cgymtype").val(res[0].gymtypename);
+        $("#cmembertype").val(res[0].membertypename);
+        $("#cstartdate").val(moment(res[0].startdate).format("YYYY-MM-DD"));
+        $("#cenddate").val(moment(res[0].enddate).format("YYYY-MM-DD"));
+        $("#camount").val(res[0].amount);
+        $("#cpaid").val(res[0].paid);
+        $("#cbalance").val(res[0].balance);
+
+        $("#cheight").val(res[0].height);
+        $("#cweight").val(res[0].weight);
+        $("#cthighsize").val(res[0].thighsize);
+        $("#cbicepsize").val(res[0].bicepsize);
+        $("#ccalfsize").val(res[0].calfsize);
+
+        var cphoto = res[0].cphoto;
+        if(cphoto=="" || cphoto==" ")
+          cphoto = "../img/default.png";
+
+        $('.cphoto').attr('src', cphoto);
+        
+      
+    }).fail(function(){
+         toastr.error('Please check Network...','Error...')
+    });
+      
+  }
+
+  loadCustomerMemberList(getParameterByName('cid'));
+  loadInvoiceCustomer(getParameterByName('cid'));
+  loadsinglecustomer(getParameterByName('cid'));
+
+  });
+</script>
+</body>
+
+</html>

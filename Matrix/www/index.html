@@ -83,11 +83,16 @@
     var modal = new Vue({
         el: '#login-box-body',
         data: {
-            password: 'sivakavi',
-            username: 'sivakavi',
+            password: '',
+            username: '',
         },
         methods: {
             submit: function (e) {
+                if(this.username=="" || this.username==null){
+                  alert("Please enter username");
+                }else if(this.password=="" || this.password==null){
+                  alert("Please enter password");
+                }else{
                 e.preventDefault();
                 console.log('submit');
                 var url = domainUrl + 'user/userlogin';
@@ -143,6 +148,7 @@
                     toastr.error('Please check Network...','Error...')
                 });
             }
+          }
         }
     });
   });
