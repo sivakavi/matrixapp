@@ -704,7 +704,8 @@
                     $("#cthighsize").val("");
                     $("#cbicepsize").val("");
                     $("#ccalfsize").val("");
-                    $("#datepicker").datepicker("setDate", "");
+                    //$("#datepicker").datepicker("setDate", "");
+                    $("#datepicker").datepicker("setDate", new Date());
                     $("#cmale").prop("checked", true)
                   }else{
                     toastr.success('Error...!', 'Customer')
