@@ -35,10 +35,35 @@
       padding-left: 25px
     }
   </style>
+  <style>
+   #overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    display: none;
+    z-index: 10000;
+  }
+  #loading {
+      width: 50px;
+      height: 57px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -28px 0 0 -25px;
+  }
+  </style>
 
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
+  <div id="overlay">
+    <img id="loading" src="../img/loading.gif">
+  </div>
   <div class="wrapper" id="app-3">
     <header class="main-header">
       <!-- Logo -->
@@ -72,10 +97,10 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <button class="btn bg-purple margin">Profile</button>
+                    <a href="profile.html"><button class="btn bg-purple margin">Profile</button></a>
                   </div>
                   <div class="pull-right">
-                    <button class="btn bg-purple margin logout">Sign out</button>
+                    <a href="changepassword.html"><button class="btn bg-purple margin">Change Password</button></a>
                   </div>
                 </li>
               </ul>
@@ -373,6 +398,8 @@
   });
 
   function loadsinglecustomer(x){
+
+    $("#overlay").show();
     $.get(domainUrl + 'customer/getcustomerbyid?cid='+x, function(res, status){
 
         console.log(res);  
@@ -383,8 +410,11 @@
         $("#cmembertypename").val(res[0].membertypename);
         $("#camount").val(res[0].balance);
         $('#cbalance').val(res[0].balance);
+
+        $("#overlay").hide();
         
     }).fail(function(){
+      $("#overlay").hide();
          toastr.error('Please check Network...','Error...')
     });
       
@@ -393,9 +423,12 @@
   //auto complete
     var dataSource = [];
 
+    $("#overlay").show();
+
     $.get(domainUrl + 'customer/getbalancebillcustomersearch', function(res, status){
       dataSource = res ;
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
 
@@ -403,7 +436,9 @@
     function loadinvoiceno(){
         $.get(domainUrl + 'customer/getinvoicenumber', function(res, status){
           $("#cinvoiceno").val(res);
+          $("#overlay").hide();
         }).fail(function(){
+          $("#overlay").hide();
           toastr.error('Please check Network...','Error...')
         });
     }
@@ -434,7 +469,7 @@
     $("#invoicebtn").click(function(){
     var invoiceno = $("#cinvoiceno").val();
     var cid = $("#ccid").val();
-    var description = " Membershipt Type : "+$("#cmembertypename").val();
+    var description = "Balance Amount - Membership Type : "+$("#cmembertypename").val();
     var amount = $("#camount").val();
     var paid = $("#cpaid").val();
     var balance = $("#cbalance").val();
@@ -448,6 +483,7 @@
       $("#cpaid").val("");
       $("#cbalance").val($("#camount").val());
     }else{
+      $("#overlay").show();
        var params = {
                   invoiceno: invoiceno,
                   cid: cid,
@@ -476,13 +512,16 @@
                     loadinvoiceno();
 
                     setTimeout(function(){
+                        $("#overlay").hide();
                         window.location.href = 'bill.html?invoiceno='+invoiceno;
                     }, 1000);
 
                   }else{
+                    $("#overlay").hide();
                     toastr.success('Error...!', 'Invoice')
                   }
                 }).fail(function(){
+                  $("#overlay").hide();
                     toastr.error('Please check Network...','Error...')
                 });
 

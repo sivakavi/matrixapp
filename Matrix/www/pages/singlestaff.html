@@ -29,11 +29,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <style>
-    .alncenter{
-      text-align:center;
-    }
-  </style>
+
   <style>
    #overlay {
     position: absolute;
@@ -129,7 +125,7 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
-          <li class="treeview active">
+          <li class="treeview">
             <a href="#">
               <i class="fa fa-user"></i>
               <span>Customer</span>
@@ -142,7 +138,7 @@
               <li><a href="editcustomer.html"><i class="fa fa-edit"></i> Edit Customer</a></li>
               <li><a href="customerlist.html"><i class="fa fa-list-alt"></i> Customer List</a></li>
               <li><a href="expiredcustomer.html"><i class="fa fa-list-ul"></i> Expired Customer</a></li>
-              <li class="active"><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
+              <li><a href="paymentduecustomer.html"><i class="fa fa-rupee"></i> Payment Due Customer</a></li>
               <li><a href="comingsoonexpirecustomer.html"><i class="fa fa-minus-square-o"></i> Coming Soon Expire Customer</a></li>
             </ul>
           </li>
@@ -216,35 +212,81 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>Payment Due Customer List</h1>
+        <h1>Single Staff</h1>
         <ol class="breadcrumb">
           <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <li class="active">Payment Due Customer List</li>
+          <li class="active">Single Staff</li>
         </ol>
       </section>
 
       <!-- Main content -->
       <section class="content">
-        <div style="background:#fff;padding:20px;">
-        <table id="paymentduecustomerlist" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Photo</th>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Mobile</th>
-                      <th>Membertype</th>
-                      <th>Gymtype</th>
-                      <th>Join Date</th>
-                      <th>Start Date</th>
-                      <th>Expire Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
 
-                  </tbody>
-                </table>
+      <div class="row">
+        <div class="col-md-6">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle uuphoto" alt="User profile picture">
+
+              <h3 class="profile-username text-center uuname"></h3>
+
+              <p class="text-muted text-center uuserid"></p>
+            </div>
+            <!-- /.box-body -->
           </div>
+          <!-- /.box -->
+          </div>
+          <div class="col-md-6">
+
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-user margin-r-5"></i> Role</strong>
+
+              <p class="text-muted uurole"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-phone margin-r-5"></i> Mobile</strong>
+
+              <p class="text-muted uuphone"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-envelope margin-r-5"></i> Email</strong>
+
+              <p class="text-muted uuemail"></p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
+
+              <p class="text-muted uuaddress"></p>
+
+              <hr>
+              
+              <strong><i class="fa fa-calendar margin-r-5"></i> Join Date</strong>
+
+              <p class="text-muted uujoindate"></p>
+
+              
+
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
       </section>
       <!-- /.content -->
     </div>
@@ -337,95 +379,54 @@
     window.location.href = '../index.html';
   });
 
+  function getParameterByName(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
-  function loadPaymentDueCustomerList(){
+  
 
+
+  function loadsinglestaff(x){
     $("#overlay").show();
+    $.get(domainUrl + 'user/getuser?userid='+x, function(res, status){
 
-        $.get(domainUrl + 'customer/getallbalanceduecustomer', function(res, status){
+        $(".uuserid").append(res[0].userid);
+        $(".uuname").append(res[0].fname +" "+ res[0].lname);
+        $(".uuemail").append(res[0].email);
+        $(".uuphone").append(res[0].phone);
+        $(".uuaddress").append(res[0].address);
+        $(".uujoindate").append(moment(res[0].createdat).format("YYYY-MM-DD"));
+        
+        var cphoto = res[0].profileimage;
+        if(cphoto=="" || cphoto==" ")
+          cphoto = "../img/default.png";
 
-        $("#paymentduecustomerlist").DataTable({
-          responsive: true,
-          data: res,
-          columns: [
-            {"data": "cphoto",
-              render: function ( data, type, obj ) {
-                if (data != null && obj.cphoto != null && obj.cphoto != "" && obj.cphoto != " ") {
-                  return '<img src="'+ data +'" alt="profile img" style="width:30px; height:30px;"/>';
-                }else{
-                  return'<img src="../img/default.png" alt="profile img" style="width:30px; height:30px;"/>';
-                }
-              },
-              "sClass":"alncenter"
-            },
-            {"data":"cid",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +'</a>';
-                }
-              }
-            },
-            {"data":"fname",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return '<a href="singlecustomer.html?cid='+obj.cid+'">'+ data +' '+ obj.lname +'</a>';
-                }
-              }
-            },
-            {"data":"phone",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"membertypename",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"gymtypename",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return data;
-                }
-              }
-            },
-            {"data":"joindate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            },
-            {"data":"startdate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            },
-            {"data":"enddate",
-              render: function ( data, type, obj ) {
-                if (data != null) {
-                  return moment(data).format("YYYY-MM-DD");
-                }
-              }
-            }
-            ]
-        });
+        if(res[0].userrole==1)
+            $(".uurole").append("ADMIN");
+        else if(res[0].userrole==2)
+            $(".uurole").append("STAFF");
+
+        $('.uuphoto').attr('src', cphoto);
 
         $("#overlay").hide();
+        
+      
     }).fail(function(){
       $("#overlay").hide();
-      toastr.error('Please check Network...','Error...')
+         toastr.error('Please check Network...','Error...')
     });
+      
   }
 
-
-  loadPaymentDueCustomerList();
+  loadsinglestaff(getParameterByName('userid'));
 
   });
 </script>

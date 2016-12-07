@@ -34,9 +34,35 @@
       text-align:center;
     }
   </style>
+
+  <style>
+   #overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    display: none;
+    z-index: 10000;
+  }
+  #loading {
+      width: 50px;
+      height: 57px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -28px 0 0 -25px;
+  }
+  </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
+  <div id="overlay">
+    <img id="loading" src="../img/loading.gif">
+  </div>
   <div class="wrapper" id="app-3">
     <header class="main-header">
       <!-- Logo -->
@@ -70,10 +96,10 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <button class="btn bg-purple margin">Profile</button>
+                    <a href="profile.html"><button class="btn bg-purple margin">Profile</button></a>
                   </div>
                   <div class="pull-right">
-                    <button class="btn bg-purple margin logout">Sign out</button>
+                    <a href="changepassword.html"><button class="btn bg-purple margin">Change Password</button></a>
                   </div>
                 </li>
               </ul>
@@ -253,7 +279,11 @@
 
   function loadStaffList(){
 
+    $("#overlay").show();
+
         $.get(domainUrl + 'user/getalluser', function(res, status){
+
+          $("#overlay").hide();
 
         $("#stafflist").DataTable({
           responsive: true,
@@ -311,6 +341,7 @@
             ]
         });
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -390,12 +421,17 @@
   }
 
   function changetodeactive(x){
+
+    
      
       if(confirm("Do you want to block this user ?")){
+        $("#overlay").show();
         $.get(domainUrl + 'user/activechange?userid='+ x +'&active=0', function(res, status){
              toastr.success('User Blocked Successfully...!', 'User Active')
              loadStaff();
+             $("#overlay").hide();
         }).fail(function(){
+          $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
         
@@ -404,10 +440,13 @@
 
   function changetoactive(x){
       if(confirm("Do you want to unblock this user ?")){
+        $("#overlay").show();
         $.get(domainUrl + 'user/activechange?userid='+ x +'&active=1', function(res, status){
              toastr.success('User Unblocked Successfully...!', 'User Active')
              loadStaff();
+             $("#overlay").hide();
         }).fail(function(){
+            $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
         

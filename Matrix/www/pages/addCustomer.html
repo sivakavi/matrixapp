@@ -36,9 +36,34 @@
       padding-left: 25px
     }
   </style>
+  <style>
+   #overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    display: none;
+    z-index: 10000;
+  }
+  #loading {
+      width: 50px;
+      height: 57px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -28px 0 0 -25px;
+  }
+  </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
+  <div id="overlay">
+    <img id="loading" src="../img/loading.gif">
+  </div>
   <div class="wrapper" id="app-3">
     <header class="main-header">
       <!-- Logo -->
@@ -72,10 +97,10 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <button class="btn bg-purple margin">Profile</button>
+                    <a href="profile.html"><button class="btn bg-purple margin">Profile</button></a>
                   </div>
                   <div class="pull-right">
-                    <button class="btn bg-purple margin logout">Sign out</button>
+                    <a href="changepassword.html"><button class="btn bg-purple margin">Change Password</button></a>
                   </div>
                 </li>
               </ul>
@@ -489,10 +514,14 @@
       autoclose: true
     });
 
+    $("#datepicker").datepicker("setDate", new Date());
+
     //startdate Date picker
     $('#cstartdate').datepicker({
       autoclose: true
     });
+
+    $("#overlay").show();
 
     function randomString(length, chars) {
         var result = '';
@@ -506,15 +535,17 @@
         $.get(domainUrl + 'customer/getcheckcid?cid='+c, function(res, status){
           if(res == "success"){
             $("#ccid").val(c);
+            $("#overlay").hide();
           }else if(res == "fail"){
             loadCid();
           }
         }).fail(function(){
+          $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
     }
 
-    loadCid();
+    
         
 
     $("#cstartdate").prop('disabled', true);
@@ -536,6 +567,7 @@
                 $("#cmembertype").append('<option value="'+ res[i].membertypeid +'" data-duration="'+ res[i].duration +'" data-amount="'+ res[i].amount +'">'+ res[i].membertypename +'</option>');
             }
         }).fail(function(){
+            $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
     }
@@ -548,12 +580,15 @@
                 $("#cgymtype").append('<option value="'+ res[i].gymtypeid +'">'+ res[i].gymtypename +'</option>');
             }
         }).fail(function(){
+            $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
     }
 
     loadmembertype();
     loadgymtype();
+
+    loadCid();
 
     $('#cmembertype').change(function(){
         //alert($(this).children('option:selected').data('amount')+"----"+$(this).val());
@@ -615,6 +650,7 @@
         }else if(startdate == "" || startdate == null){
           alert("Please choose startdate....")
         }else{
+          $("#overlay").show();
           var params = {
                   cid: cid,
                   fname: fname,
@@ -673,7 +709,9 @@
                   }else{
                     toastr.success('Error...!', 'Customer')
                   }
+                  $("#overlay").hide();
                 }).fail(function(){
+                  $("#overlay").hide();
                     toastr.error('Please check Network...','Error...')
                 });
         }

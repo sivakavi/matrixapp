@@ -28,8 +28,33 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style>
+   #overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    display: none;
+    z-index: 10000;
+  }
+  #loading {
+      width: 50px;
+      height: 57px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -28px 0 0 -25px;
+  }
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
+  <div id="overlay">
+    <img id="loading" src="../img/loading.gif">
+  </div>
 <div class="wrapper" id="app-3">
   <header class="main-header">
       <!-- Logo -->
@@ -63,10 +88,10 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <button class="btn bg-purple margin">Profile</button>
+                    <a href="profile.html"><button class="btn bg-purple margin">Profile</button></a>
                   </div>
                   <div class="pull-right">
-                    <button class="btn bg-purple margin logout">Sign out</button>
+                    <a href="changepassword.html"><button class="btn bg-purple margin">Change Password</button></a>
                   </div>
                 </li>
               </ul>
@@ -631,6 +656,9 @@ $(function () {
   //-----------------  
 
 
+  $("#overlay").show();
+
+
   function loadlasteightmember(){
     $.get(domainUrl + 'customer/getlasteightcustomer', function(res, status){
 
@@ -650,6 +678,7 @@ $(function () {
 
       
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -676,6 +705,7 @@ $(function () {
       }
       
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -700,6 +730,7 @@ $(function () {
       pieChart.Doughnut(PieData, pieOptions);
       
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -709,6 +740,7 @@ $(function () {
       $("#allcustomer").empty();
       $("#allcustomer").append(res.length);
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -720,6 +752,7 @@ $(function () {
       $("#expiredcustomer").empty();
       $("#expiredcustomer").append(res.length);
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -727,12 +760,13 @@ $(function () {
   function loadThisMonthExpiredCustomer(){
     var today = new Date();
     var month = today.getMonth()+1;
-    var year = today.getYear();
+    var year = today.getFullYear();
     var t = moment(today).format("YYYY-MM-DD")
     $.get(domainUrl + 'customer/getallthismonthexpirecustomer?year='+ year +'&month='+ month +'&today='+t, function(res, status){
       $("#thismonthexpire").empty();
       $("#thismonthexpire").append(res.length);
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -742,6 +776,7 @@ $(function () {
       $("#paymentduecustomer").empty();
       $("#paymentduecustomer").append(res.length);
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -764,8 +799,11 @@ $(function () {
                   +'<span class="text">'+ res[i].todoname +'</span><small class="label label-success"><i class="fa fa-clock-o"></i> '+ moment(res[i].createdat).format("YYYY-MM-DD HH:mm:ss") +'</small>'
                   +'<div class="tools"><i class="fa fa-edit" onclick="todoedit('+ res[i].todoid +')"></i><i class="fa fa-check-square-o" onclick="todostatuschange('+ res[i].todoid +')"></i></div></li>');
       }
+
+      $("#overlay").hide();
       
     }).fail(function(){
+      $("#overlay").hide();
       toastr.error('Please check Network...','Error...')
     });
   }
@@ -781,6 +819,8 @@ $(function () {
                   updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
                 }
 
+                $("#overlay").show();
+
                 $.post(domainUrl + 'todo/addtodo',params, function(res, status){
                   if(res=="success"){
                     toastr.success('Added Successfully...!', 'ToDo')
@@ -791,7 +831,9 @@ $(function () {
                     //alert("Error.....");
                     toastr.success('Error...!', 'ToDo')
                   }
+                  $("#overlay").hide();
                 }).fail(function(){
+                  $("#overlay").hide();
                     toastr.error('Please check Network...','Error...')
                 });
     });
@@ -804,6 +846,8 @@ $(function () {
                   updatedat:moment(today).format("YYYY-MM-DD HH:mm:ss")
                 }
 
+                $("#overlay").show();
+
                 $.post(domainUrl + 'todo/edittodo',params, function(res, status){
                   if(res=="success"){
                     toastr.success('Edit Successfully...!', 'ToDo')
@@ -815,7 +859,9 @@ $(function () {
                     //alert("Error.....");
                     toastr.success('Error...!', 'ToDo')
                   }
+                  $("#overlay").hide();
                 }).fail(function(){
+                  $("#overlay").hide();
                     toastr.error('Please check Network...','Error...')
                 });
     });
@@ -842,10 +888,13 @@ function loadTodoListAfter(){
     function todostatuschange(x){
 
       if(confirm("Do you want to move this todo to finish state ?")){
+        $("#overlay").show();
         $.get(domainUrl + 'todo/closetodo?todoid='+ x, function(res, status){
              toastr.success('Status changed Successfully...!', 'ToDo')
              loadTodoListAfter();
+             $("#overlay").hide();
         }).fail(function(){
+          $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
         
@@ -853,11 +902,14 @@ function loadTodoListAfter(){
     }
 
     function todoedit(x){
+      $("#overlay").show();
       $.get(domainUrl + 'todo/gettodobyid?todoid='+ x, function(res, status){
              $("#edittodoid").val(res[0].todoid);
              $("#edittodoname").val(res[0].todoname);
              $('#edittodolist').modal('show');
+             $("#overlay").hide();
         }).fail(function(){
+          $("#overlay").hide();
             toastr.error('Please check Network...','Error...')
         });
     }
